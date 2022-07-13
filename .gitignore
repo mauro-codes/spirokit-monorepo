@@ -3,7 +3,6 @@ packages/**/node_modules/
 apps/**/node_modules/
 apps/**/storybook-static/
 .expo/
-apps/**/.expo/
 npm-debug.*
 *.jks
 *.p8
