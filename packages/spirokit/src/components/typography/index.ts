@@ -1,0 +1,10 @@
+export { LargeTitle } from "./large-title"
+export { TitleOne } from "./title-one"
+export { TitleTwo } from "./title-two"
+export { TitleThree } from "./title-three"
+export { Body } from "./body"
+export { Subhead } from "./subhead"
+export { Footnote } from "./footnote"
+export { Caption } from "./caption"
+
+export type { TypographyProps } from "./types"
