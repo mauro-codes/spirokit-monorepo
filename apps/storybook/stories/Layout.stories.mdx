@@ -1,0 +1,68 @@
+import { Meta } from "@storybook/addon-docs"
+import { Dashboard } from "../src/documentation"
+
+<Meta 
+	title="Components/Layout"
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}} 
+/>
+
+# Layout
+
+---
+
+---
+
+Given that Spirokit was built on top of [Native Base](https://nativebase.io/), we are inheriting all the layout components from it, so you don't need to add Native Base to your project.
+Besides, Spirokit adds a few customizations on top such as:
+- Shorthand props like `p`, `m`, `w`, `h` where removed in favor of a more easy to read code.
+- Color props like `backgroundColor` and `color` will list all the colors included in spirokit.
+- Typography props like `lineHeight`, `letterSpacing`, `fontWeight`, and `fontSize` will also list Spirokit tokens only.
+
+Here`s a list of all the available components:
+
+## Box
+
+Flexible and generic component similar to a `div`or a `View`component. [More info](https://docs.nativebase.io/box#h2-props)
+
+## HStack
+
+Allows you to align items horizontally. [More info](https://docs.nativebase.io/hstack#h2-props)
+
+## VStack
+
+Allows you to align items vertically. [More info](https://docs.nativebase.io/vstack#h2-props)
+
+## ZStack
+
+Allows you to stack elements on top of each other. [More info](https://docs.nativebase.io/zstack#h2-props)
+
+## Flex
+
+Essentially a `Box` component with `display: flex`. [More info](https://docs.nativebase.io/flex#h2-props)
+
+## AspectRatio
+
+`Box`component that allows you to define the desired height or width, and choose the aspect ratio. The component will calculate the missing dimension for you. [More info](https://docs.nativebase.io/aspect-ratio#h2-props)
+
+## Center
+
+`Box`component that automatically centers the content both vertically and horizontally. [More info](https://docs.nativebase.io/center#h2-props)
+
+## Container
+
+The Container restricts a content's width according to current breakpoint, while keeping the size fluid. [More info](https://docs.nativebase.io/container#h2-props)
+
+
+
+
+
+
+
+
+
+
