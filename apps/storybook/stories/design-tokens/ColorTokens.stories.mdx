@@ -1,0 +1,30 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { usePoppins, SpiroKitProvider, useSpiroKitTheme, LargeTitle, TitleOne, Footnote, TitleThree, Subhead, Body, Button, HorizontalCard, Avatar, Badge } from "spirokit"
+import { lineHeights, fontWeights, letterSpacings, fontSizes, Box, VStack, Text, AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { FontCardList, AccentColorSwatches, GrayColorSwatches, CustomAccentColor } from "../../src/documentation"
+
+<Meta 
+	title="Getting started/Design tokens/Color tokens"
+    component={Text}  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+<Story 
+	name="Accent colors">
+    <LargeTitle marginBottom={4} marginX={-4}>Colors</LargeTitle>
+	<TitleOne marginBottom={4}>Accent colors</TitleOne>
+    <AccentColorSwatches/>
+</Story>
+
+<Story 
+	name="Gray colors">
+    <TitleOne marginBottom={4}>Gray colors</TitleOne>
+    <Body marginBottom={4}>Besides, there are 3 types of gray scales, with different "temperatures" to mix and match with any accent color mentioned before:</Body>
+    <GrayColorSwatches/>
+</Story>

@@ -1,3 +1,4 @@
+import React from "react"
 import { ZStack as ZStackNB } from "native-base"
 import { ZStackProps } from "./types"
 

@@ -1,0 +1,141 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack } from "spirokit"
+import {  
+	radioArgTypes,
+	radioParameters, 
+	RadioArgumentsTableComponent,
+	statusFlagsParameters,
+	StatusFlagsComponent,
+	sizeParameters,
+	SizeComponent,
+	spacingParameters,
+	SpacingComponent,
+	accentColorParameters,
+	AccentColorComponent,
+} from "./radio-examples"
+
+<Meta 
+	title="Components/Radio button/Radio"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Radio
+
+<Canvas>
+	<Story
+		name="Arguments Table"
+		args={{
+			value: undefined,
+			isDisabled: false,
+			isHovered: false,
+			isPressed: false,
+			isFocused: false,
+			isInvalid: false,
+			isFocusVisible: true,
+			space: 3,
+			size: "md",
+			ref: undefined,
+			children: "Option 1",
+			accentColor: undefined,
+			colorMode: undefined,
+		}}
+		argTypes={radioArgTypes}
+		parameters={radioParameters}>
+		{(args) => {
+			return (
+				<RadioArgumentsTableComponent
+					isHovered={args.isHovered}
+					isPressed={args.isPressed}
+					isFocused={args.isFocused}
+					isInvalid={args.isInvalid}
+					isFocusVisible={args.isFocusVisible}
+					isDisabled={args.isDisabled} 
+					accentColor={args.accentColor}
+					colorMode={args.colorMode}
+					space={args.space}
+					size={args.size}
+					value={args.value}
+					children={args.children}>
+				</RadioArgumentsTableComponent>
+			)
+		}}
+	</Story>
+</Canvas>
+
+# Arguments Table
+
+<ArgsTable story="Arguments Table" />
+
+# Status flags
+
+There are different flags that you can pass to each `Radio` component for further control over it:
+
+`isDisabled`, `isHovered`, `isPressed`, `isFocused`, `isFocusVisible`, `isInvalid`
+
+<Canvas withSource="open">
+	<Story
+		name="Status flags"
+		parameters={statusFlagsParameters}>
+		{(args) => {
+			return (
+				<StatusFlagsComponent></StatusFlagsComponent>
+			)
+		}}
+	</Story>
+</Canvas>
+
+# Size
+
+You can choose between `sm`, `md` and `lg` sizes for each `Radio` component. If you specified a size in the `Radio.Group`, it will be automatically propagated to each child, but you can optionally override that value on each child.
+
+<Canvas withSource="open">
+	<Story
+		name="Size"
+		parameters={sizeParameters}>
+		{(args) => {
+			return (
+				<SizeComponent></SizeComponent>
+			)
+		}}
+	</Story>
+</Canvas>
+
+# Space
+
+You can optionally specify the horizontal spacing between the radio button and its label. The default value is `3`.
+
+<Canvas withSource="open">
+	<Story
+		name="Spacing"
+		parameters={spacingParameters}>
+		{(args) => {
+			return (
+				<SpacingComponent></SpacingComponent>
+			)
+		}}
+	</Story>
+</Canvas>
+
+# Accent color override
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={accentColorParameters}>
+		{(args) => {
+			return (
+				<AccentColorComponent></AccentColorComponent>
+			)
+		}}
+	</Story>
+</Canvas>

@@ -1,0 +1,653 @@
+import { Box, Image, TitleThree, Footnote, Subhead, HorizontalCard, Avatar, Badge } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import { NewspaperIcon } from "react-native-heroicons/outline"
+import dedent from "ts-dedent"
+import { spaceArgTypes, SpaceArgTypesComments } from "./arg-types/StyleProps"
+
+<Meta 
+  title="Components/Horizontal Card"
+  component="HorizontalCard" 
+  parameters={{
+		viewMode: "docs",
+		previewTabs: {
+			canvas: { hidden: true }
+		}
+	}}/>
+
+# Horizontal Card
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Badge, Avatar } from "@spirokit/core"
+						import { TitleThree, Subhead, Footnote } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<HorizontalCard
+									BadgeComponent={<Badge>Travel</Badge>} 
+									UserAvatarComponent={<Avatar alt="Siv Marko profile image" source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>}
+									userName="Siv Marko"
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+									DateComponent={<Footnote>15th June 2021</Footnote>}
+									AssetRightComponent={<Image source={{ uri: "https://i.imgur.com/1lSpdz3.png" }} alt="Image of a ship"></Image>}>
+								</HorizontalCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				BadgeComponent={<Badge>Travel</Badge>}
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				AssetRightComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}></HorizontalCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## With Image
+
+<Canvas withSource="open">
+	<Story
+		name="Image on the left"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Avatar } from "@spirokit/core"
+						import { TitleThree, Subhead, Footnote } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Image on the left */}
+									<HorizontalCard
+										UserAvatarComponent={<Avatar alt="Siv Marko profile image" source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>}
+										userName="Siv Marko"
+										TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+										DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+										DateComponent={<Footnote>15th June 2021</Footnote>}
+										AssetLeftComponent={<Image source={{ uri: "https://i.imgur.com/1lSpdz3.png" }} alt="Image of a ship"></Image>}>
+									</HorizontalCard>
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				AssetLeftComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}>
+			</HorizontalCard>
+		</Box>
+	</Story>
+	<Story
+		name="Image on the right"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`						
+									{/* Image on the right */}
+									<HorizontalCard
+										UserAvatarComponent={<Avatar alt="Siv Marko profile image" source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>}
+										userName="Siv Marko"
+										TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+										DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+										DateComponent={<Footnote>15th June 2021</Footnote>}
+										AssetRightComponent={<Image source={{ uri: "https://i.imgur.com/1lSpdz3.png" }} alt="Image of a ship"></Image>}>
+									</HorizontalCard>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				AssetRightComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}>
+			</HorizontalCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## With icons 
+
+<Canvas withSource="open">
+	<Story
+		name="Icon on the left"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Avatar } from "@spirokit/core"
+						import { TitleThree, Subhead, Footnote } from "@spirokit/core/typography"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Icon on the left */}
+									<HorizontalCard
+										UserAvatarComponent={<Avatar alt="Siv Marko profile image" source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>}
+										userName="Siv Marko"
+										TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+										DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+										DateComponent={<Footnote>15th June 2021</Footnote>}
+										AssetLeftComponent={NewspaperIcon}>
+									</HorizontalCard>
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				AssetLeftComponent={NewspaperIcon}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}></HorizontalCard>
+		</Box>
+	</Story>
+	<Story
+		name="Icon on the right"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Icon on the right */}
+									<HorizontalCard
+										UserAvatarComponent={<Avatar alt="Siv Marko profile image" source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>}
+										userName="Siv Marko"
+										TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+										DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+										DateComponent={<Footnote>15th June 2021</Footnote>}
+										AssetRightComponent={NewspaperIcon}>
+									</HorizontalCard>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				AssetRightComponent={NewspaperIcon}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}>
+			</HorizontalCard>
+		</Box>
+	</Story>
+</Canvas> 
+
+## Using badges
+
+You can optionally display a `Badge` in the top right corner of the card. This is especially useful in the following scenarios:
+
+-   Highlight featured or top news
+-   Categories
+-   Price badges for an e-commerce site
+
+<Canvas withSource="open">
+	<Story
+		name="Using badges"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Badge } from "@spirokit/core"
+						import { TitleThree, Footnote } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<HorizontalCard
+									BadgeComponent={<Badge>Travel</Badge>}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									DateComponent={<Footnote>15th June 2021</Footnote>}
+									AssetLeftComponent={
+										<Image
+											source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+											alt="Image of a ship">
+										</Image>
+									}>
+								</HorizontalCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			return (
+				<Box width={375} alignItems="flex-start">
+					<HorizontalCard
+						BadgeComponent={<Badge>Travel</Badge>}
+						TitleComponent={
+							<TitleThree>Resting place of Australia's last convict ship</TitleThree>
+						}
+						AssetLeftComponent={
+							<Image
+								source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+								alt="Image of a ship">
+							</Image>
+						}
+						DateComponent={<Footnote>15th June 2021</Footnote>}>
+					</HorizontalCard>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Title only
+
+The only required prop is the `TitleComponent`. Here's an example of the component in its simpler form.
+
+<Canvas withSource="open">
+	<Story
+		name="Without components"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						
+						const App = () => {
+							return (
+								<HorizontalCard
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}>
+								</HorizontalCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				TitleComponent={
+					<TitleThree>Resting place of Australia's last convict ship</TitleThree>}>
+			</HorizontalCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story 
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Avatar } from "@spirokit/core"
+						import { TitleThree, Footnote, Subhead } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<HorizontalCard
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									DateComponent={<Footnote>15th June 2021</Footnote>}
+									DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+									AssetLeftComponent={
+										<Image
+											source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+											alt="Image of a ship">
+										</Image>
+									}
+									UserAvatarComponent={
+										<Avatar
+											alt="Siv Marko profile image"
+											source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}>
+										</Avatar>
+									}
+									colorMode="light">
+								</HorizontalCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} p="4" bg="white">
+			<HorizontalCard
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				AssetLeftComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}
+				colorMode="light">
+			</HorizontalCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story 
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Badge, Avatar } from "@spirokit/core"
+						import { TitleThree, Footnote, Subhead } from "@spirokit/core/typography"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<HorizontalCard
+									BadgeComponent={<Badge>Travel</Badge>}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									DateComponent={<Footnote>15th June 2021</Footnote>}
+									DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+									UserAvatarComponent={
+										<Avatar
+											alt="Siv Marko profile image"
+											source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}>
+										</Avatar>
+									}
+									accentColor="rose"
+									AssetLeftComponent={NewspaperIcon}>
+								</HorizontalCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<HorizontalCard
+				BadgeComponent={<Badge>Travel</Badge>}
+				UserAvatarComponent={
+					<Avatar
+						alt="Siv Marko profile image"
+						source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+				}
+				userName="Siv Marko"
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+				DateComponent={<Footnote>15th June 2021</Footnote>}
+				accentColor="rose"
+				AssetLeftComponent={NewspaperIcon}>
+			</HorizontalCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { HorizontalCard, Avatar, Badge } from "@spirokit/core"
+						import { TitleThree, Subhead, Footnote } from "@spirokit/core/typography"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<HorizontalCard
+									BadgeComponent={<Badge>Travel</Badge>} 
+									UserAvatarComponent={<Avatar alt="Siv Marko profile image" source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>}
+									userName="Siv Marko"
+									accentColor="blue"
+									colorMode="light"
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									DescriptionComponent={<Subhead>Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.</Subhead>}
+									DateComponent={<Footnote>15th June 2021</Footnote>}
+									AssetLeftComponent={NewspaperIcon}>
+								</HorizontalCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			return (
+				<Box width={375} p="4" bg="white" alignItems="flex-start">
+					<HorizontalCard
+						BadgeComponent={<Badge>Travel</Badge>}
+						UserAvatarComponent={
+							<Avatar
+								alt="Siv Marko profile image"
+								source={{ uri: "https://i.imgur.com/pfR8Ytj.png" }}></Avatar>
+						}
+						accentColor="blue"
+						colorMode="light"
+						userName="Siv Marko"
+						TitleComponent={
+							<TitleThree>Resting place of Australia's last convict ship</TitleThree>
+						}
+						DescriptionComponent={
+							<Subhead>
+								Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox
+								on February 1873 might sound dramatic.
+							</Subhead>
+						}
+						DateComponent={<Footnote>15th June 2021</Footnote>}
+						AssetLeftComponent={NewspaperIcon}>
+					</HorizontalCard>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		TitleComponent: "Resting place of Australia's last convict ship",
+		DateComponent: "15th June 2021",
+		DescriptionComponent:
+			"Wellington, New Zealand (CNN) - The storm that struck the Edwin Fox on February 1873 might sound dramatic.",
+		BadgeComponent: "Travel",
+		userName: "Siv Marko",
+		colorMode: undefined,
+		accentColor: undefined,
+		UserAvatarComponent: undefined,
+		AssetLeftComponent: undefined,
+		AssetRightComponent: undefined
+	}}
+	argTypes={{
+		TitleComponent: {
+			description: "Component for the card title",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof TitleThree>"
+				}
+			},
+			control: { type: "text" }
+		},
+		DateComponent: {
+			description: "**Optional** \n\nComponent for the card date",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Footnote>"
+				}
+			},
+			control: { type: "text" }
+		},
+		DescriptionComponent: {
+			description: "**Optional** \n\nComponent for the card description",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Subhead>"
+				}
+			},
+			control: { type: "text" }
+		},
+		BadgeComponent: {
+			description:
+				"**Optional** \n\nComponent for the badge on the top right corner of the card",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Badge>"
+				}
+			},
+			control: { type: "text" }
+		},
+		UserAvatarComponent: {
+			description: "**Optional**\n\nComponent for the user's avatar",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Avatar>"
+				}
+			},
+			control: { disable: true }
+		},
+		userName: {
+			description: "**Optional** \n\nName of the user related to the card.",
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		AssetLeftComponent: {
+			description:
+				"**Optional**\n\nImage or Icon component for the card.\n\nIf you want to learn more about Native Base's Image component, please visit the following [link](https://docs.nativebase.io/3.2.x/image)",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Image> | (props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		AssetRightComponent: {
+			description:
+				"**Optional**\n\nImage or Icon component for the card.\n\nIf you want to learn more about Native Base's Image component, please visit the following [link](https://docs.nativebase.io/3.2.x/image)",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Image> | (props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description:
+				"**Optional** Allows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="HorizontalCard"/>
+	</Box>
+</Story>

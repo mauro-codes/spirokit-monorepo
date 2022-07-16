@@ -6,5 +6,6 @@ export { Body } from "./body"
 export { Subhead } from "./subhead"
 export { Footnote } from "./footnote"
 export { Caption } from "./caption"
+export { Text } from "./text"
 
 export type { TypographyProps } from "./types"

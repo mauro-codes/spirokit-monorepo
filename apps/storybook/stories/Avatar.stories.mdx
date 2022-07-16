@@ -1,0 +1,187 @@
+import { Box, Avatar } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { spaceArgTypes, SpaceArgTypesComments } from "./arg-types/StyleProps"
+
+<Meta 
+	title="Components/Avatar"
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}} 
+/>
+
+# Avatar
+
+---
+
+---
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Avatar } from "@spirokit/core"
+												
+						const App = () => {
+							return (
+								<Avatar source={{uri: https://example.com/avatar.png}} />
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Avatar
+				source={{
+					uri: "https://pbs.twimg.com/profile_images/1386835048817729540/5O_4oa7m_400x400.jpg"
+				}}
+				size="md"></Avatar>
+		</Box>
+	</Story>
+</Canvas>
+
+## Size
+
+You can choose between `sm`, `md`, and `lg` sizes by using the `size` prop. The default value is `md`.
+You can also specify a custom number.
+
+<Canvas withSource="open">
+	<Story
+		name="Small avatar"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Avatar } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<>		
+									{/* Small avatar */}
+									<Avatar size="sm" source={{uri: https://example.com/avatar.png}}></Avatar>
+									
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Avatar
+				source={{
+					uri: "https://pbs.twimg.com/profile_images/1386835048817729540/5O_4oa7m_400x400.jpg"
+				}}
+				size="sm"></Avatar>
+		</Box>
+	</Story>
+	<Story
+		name="Medium avatar"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+								{/* Default avatar */}
+								<Avatar size="sm" source={{uri: https://example.com/avatar.png}}></Avatar>
+					
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Avatar
+				source={{
+					uri: "https://pbs.twimg.com/profile_images/1386835048817729540/5O_4oa7m_400x400.jpg"
+				}}
+				size="md"></Avatar>
+		</Box>
+	</Story>
+	<Story
+		name="Large avatar"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+								{/* Large avatar */}
+								<Avatar size="lg" source={{uri: https://example.com/avatar.png}}></Avatar>
+					
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Avatar
+				source={{
+					uri: "https://pbs.twimg.com/profile_images/1386835048817729540/5O_4oa7m_400x400.jpg"
+				}}
+				size="lg"></Avatar>
+		</Box>
+	</Story>
+	<Story
+		name="Custom size avatar"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+								{/* Custom size avatar */}
+								<Avatar size={88} source={{uri: https://example.com/avatar.png}}></Avatar>
+							</>
+						)
+					}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Avatar
+				source={{
+					uri: "https://pbs.twimg.com/profile_images/1386835048817729540/5O_4oa7m_400x400.jpg"
+				}}
+				size={88}></Avatar>
+		</Box>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	argTypes={{
+		size: {
+			options: ["sm", "md", "lg"],
+			description: "**Optional**\n\nSize of the badge. The default value is `md`",
+			control: { type: "radio" },
+			defaultValue: {
+				summary: "md"
+			}
+		},
+		src: {
+			description: "**Optional**\n\nImage source",
+			table: {
+				type: {
+					summary: "ImageSourcePropType"
+				}
+			},
+			control: { disable: true }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Avatar"/>
+	</Box>
+</Story>

@@ -1,3 +1,4 @@
+import React from "react"
 import { AspectRatio as AspectRatioNB } from "native-base"
 import { AspectRatioProps } from "./types"
 

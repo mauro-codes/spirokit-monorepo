@@ -1,3 +1,4 @@
+import React from "react"
 import { Box as BoxNB } from "native-base"
 import { BoxProps } from "./types"
 

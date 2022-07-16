@@ -1,0 +1,548 @@
+import { Box, VStack, TitleOne, Body, Alert, Button } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { StarIcon } from "react-native-heroicons/outline"
+
+<Meta 
+	title="Components/Alert"
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}} 
+/>
+
+# Alert
+
+---
+
+---
+
+## Basic example (Confirm only)
+If you only want to display a message, you can avoid using the `CancelButtonComponent`. In that way, the alert modal will only show the "Confirm" button.
+
+<Canvas withSource="open">
+	<Story
+		name="Basic usage"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne } from "@spirokit/core/typography"
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<Alert 
+									isVisible={show}
+									onClose={() => setShow(false)}
+									TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>}
+									ConfirmButtonComponent={<Button>Confirm</Button>}>
+								</Alert>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Alert 
+							isVisible={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}>
+						</Alert>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Types of alerts
+
+You can optionally use the `type` to choose between `info`, `warning` and `error` types of Alerts. The main difference between these types is the accent color and the default icon included.
+
+The default value is `info`.
+
+<Canvas withSource="open">
+	<Story
+		name="Types of alerts"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne, Body } from "@spirokit/core/typography"						
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<VStack space={4}>
+									{/* Warning alert */}
+									<Alert 
+										isVisible={show}
+										onClose={() => setShow(false)}
+										type="warning"
+										TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+										SubheadingComponent={<Body>Alert subheading</Body>}
+										ConfirmButtonComponent={<Button>Confirm</Button>}
+										CancelButtonComponent={<Button onPress={() => setShow(false)}>Cancel</Button>}>
+									</Alert>
+									
+									{/* Info alert */}
+									<Alert 
+										isVisible={show}
+										onClose={() => setShow(false)}
+										type="info"
+										TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+										SubheadingComponent={<Body>Alert subheading</Body>}
+										ConfirmButtonComponent={<Button>Confirm</Button>}
+										CancelButtonComponent={<Button onPress={() => setShow(false)}>Cancel</Button>}>
+									</Alert>
+									
+									{/* Error alert */}
+									<Alert 
+										isVisible={show}
+										onClose={() => setShow(false)}
+										type="error"
+										TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+										SubheadingComponent={<Body>Alert subheading</Body>}
+										ConfirmButtonComponent={<Button>Confirm</Button>}
+										CancelButtonComponent={<Button onPress={() => setShow(false)}>Cancel</Button>}>
+									</Alert>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpenOne, setIsOpenOne] = React.useState(false)
+			const [isOpenTwo, setIsOpenTwo] = React.useState(false)
+			const [isOpenThree, setIsOpenThree] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<VStack space={4} width={375}>
+						<Button accentColor="orange" onPress={() => setIsOpenOne(true)}>Open warning modal</Button>
+						<Button onPress={() => setIsOpenTwo(true)}>Open info modal</Button>
+						<Button accentColor="red" onPress={() => setIsOpenThree(true)}>Open error modal</Button>
+						<Alert 
+							isVisible={isOpenOne}
+							onClose={() => setIsOpenOne(false)}
+							type="warning"
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}
+							CancelButtonComponent={<Button>Cancel</Button>}>
+						</Alert>
+						<Alert 
+							isVisible={isOpenTwo}
+							onClose={() => setIsOpenTwo(false)}
+							type="info"
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}
+							CancelButtonComponent={<Button>Cancel</Button>}>
+						</Alert>
+						<Alert 
+							isVisible={isOpenThree}
+							onClose={() => setIsOpenThree(false)}
+							type="error"
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}
+							CancelButtonComponent={<Button>Cancel</Button>}>
+						</Alert>
+					</VStack>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Using a custom icon
+
+By default, every type of alert will include a default icon. If you want to use a custom icon, you can use the `IconComponent` prop. 
+
+<Canvas withSource="open">
+	<Story
+		name="Using a custom icon"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne } from "@spirokit/core/typography"
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<Alert 
+									isVisible={show}
+									onClose={() => setShow(false)}
+									colorMode="light"
+									TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+									ConfirmButtonComponent={<Button>Confirm</Button>}>
+								</Alert>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Alert 
+							isVisible={isOpen}
+							onClose={() => setIsOpen(false)}
+							IconComponent={StarIcon}
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}>
+						</Alert>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding accent color `ConfirmButtonComponent` and `CancelButtonComponent`
+
+<Canvas withSource="open">
+	<Story
+		name="Override accent color for buttons"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne, Body } from "@spirokit/core/typography"
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<Alert 
+									isVisible={show}
+									onClose={() => setShow(false)}
+									TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+									SubheadingComponent={<Body>Alert subheading</Body>}
+									ConfirmButtonComponent={<Button accentColor="amber">Confirm</Button>}
+									CancelButtonComponent={<Button accentColor="amber" onPress={() => setShow(false)}>Cancel</Button>}>
+								</Alert>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Alert 
+							isVisible={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button accentColor="amber">Confirm</Button>}
+							CancelButtonComponent={<Button accentColor="amber">Cancel</Button>}>
+						</Alert>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Override color mode"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne, Body } from "@spirokit/core/typography"
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<Alert 
+									isVisible={show}
+									onClose={() => setShow(false)}
+									colorMode="light"
+									TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+									SubheadingComponent={<Body>Alert subheading</Body>}
+									ConfirmButtonComponent={<Button>Confirm</Button>}
+									CancelButtonComponent={<Button onPress={() => setShow(false)}>Cancel</Button>}>
+								</Alert>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button colorMode="light" onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Alert 
+							isVisible={isOpen}
+							onClose={() => setIsOpen(false)}
+							colorMode="light"
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}
+							CancelButtonComponent={<Button>Cancel</Button>}>
+						</Alert>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the global accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne, Body } from "@spirokit/core/typography"
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<Alert 
+									isVisible={show}
+									onClose={() => setShow(false)}
+									accentColor="rose"
+									TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+									SubheadingComponent={<Body>Alert subheading</Body>}
+									ConfirmButtonComponent={<Button>Confirm</Button>}>
+								</Alert>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button accentColor="rose" onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Alert 
+							isVisible={isOpen}
+							onClose={() => setIsOpen(false)}
+							accentColor="rose"
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}>
+						</Alert>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Alert, Button } from "@spirokit/core"
+						import { TitleOne, Body } from "@spirokit/core/typography"
+						
+						const App = () => {
+							const [show, setShow] = React.useState(false)
+							
+							return (
+								<Alert 
+									isVisible={show}
+									onClose={() => setShow(false)}
+									accentColor="rose"
+									colorMode="light"
+									TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+									SubheadingComponent={<Body>Alert subheading</Body>}
+									ConfirmButtonComponent={<Button>Confirm</Button>}>
+								</Alert>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={600} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button accentColor="rose" colorMode="light" onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Alert 
+							isVisible={isOpen}
+							onClose={() => setIsOpen(false)}
+							accentColor="rose"
+							colorMode="light"
+							TitleComponent={<TitleOne>Title example with multiple lines</TitleOne>} 
+							SubheadingComponent={<Body>Alert subheading</Body>}
+							ConfirmButtonComponent={<Button>Confirm</Button>}>
+						</Alert>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		isVisible: false,
+		TitleComponent: "Title example with multiple lines",
+		SubheadingComponent: "Alert subheading",
+		ConfirmButtonComponent: "Confirm",
+		CancelButtonComponent: "Cancel",
+		IconComponent: undefined,
+		type: undefined
+	}}
+	argTypes={{
+		isVisible: {
+			description: "If `true`, the alert will be displayed. The default value is `false`",
+			type: { name: "boolean", required: true },
+			defaultValue: {
+				summary: false
+			},
+			control: { disable: true }
+		},
+		IconComponent: {
+			description: "**Optional**\n\nComponent for the alert",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		TitleComponent: {
+			description: "Component for the alert title",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof TitleOne>"
+				}
+			},
+			control: { type: "text" }
+		},
+		SubheadingComponent: {
+			description: "**Optional**\n\nComponent for the alert subheading",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Body>"
+				}
+			},
+			control: { type: "text" }
+		},
+		ConfirmButtonComponent: {
+			description: "Component for confirmation button",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Button>"
+				}
+			},
+			control: { type: "text" }
+		},
+		CancelButtonComponent: {
+			description: "**Optional**\n\nComponent for cancel button",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Button>"
+				}
+			},
+			control: { type: "text" }
+		},
+		type: {
+			options: ["info", "warning", "error"],
+			description: "**Optional**\n\nType of alert. The default value is `info`",
+			control: { type: "radio" },
+			defaultValue: {
+				summary: "info"
+			}
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional**\n\nAllows you to override the global color mode to apply a specific color mode for this component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional**\n\nAllows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		},
+		onClose: {
+			description: "**Optional**\n\nHandler to be called when the user taps the modal close button, the cancel button or the backdrop",
+			table: {
+				type: {
+					summary: "() => void"
+				}
+			}
+		},
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />

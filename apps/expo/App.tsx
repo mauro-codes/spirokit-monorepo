@@ -1,27 +1,19 @@
 import React from "react"
-import {
-	Button,
-	SpiroKitProvider,
-	useSpiroKitTheme,
-	Box,
-	VStack,
-	AspectRatio
-} from "@spirokit/core"
+import { Button, SpiroKitProvider, useSpiroKitTheme, VStack, usePoppins } from "spirokit"
 
 import { MapIcon } from "react-native-heroicons/outline"
 
 const myTheme = useSpiroKitTheme()
 
 export default function App() {
+	const fontsLoaded = usePoppins()
+	if (!fontsLoaded) return <></>
+
 	return (
 		<SpiroKitProvider theme={myTheme}>
-			{/* <Container> */}
-			<Box safeAreaTop>
-				<VStack space={2}></VStack>
-				<AspectRatio></AspectRatio>
+			<VStack padding={4} space={2} safeAreaTop>
 				<Button IconLeftComponent={MapIcon}>Hello from spirokit</Button>
-			</Box>
-			{/* </Container> */}
+			</VStack>
 		</SpiroKitProvider>
 	)
 }

@@ -1,13 +1,9 @@
 {
-	"name": "@spirokit/core",
-	"version": "0.0.1",
+	"name": "spirokit",
+	"version": "0.0.2",
 	"scripts": {
 		"format": "prettier --write .",
 		"prepare": "bob build"
-	},
-	"peerDependencies": {
-		"native-base": "3.4.5",
-		"react-native-heroicons": "2.0.2"
 	},
 	"devDependencies": {
 		"native-base": "3.4.5",
@@ -58,6 +54,8 @@
 		"lib/**/*"
 	],
 	"dependencies": {
-		"react-native-builder-bob": "^0.18.3"
+		"react-native-builder-bob": "^0.18.3",
+		"native-base": "3.4.5",
+		"react-native-heroicons": "2.0.2"
 	}
 }

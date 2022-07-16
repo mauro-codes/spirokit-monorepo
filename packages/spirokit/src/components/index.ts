@@ -22,7 +22,8 @@ export {
 	Body,
 	Subhead,
 	Footnote,
-	Caption
+	Caption,
+	Text
 } from "./typography"
 export { TabBar } from "./tab-bar"
 export { Radio } from "./radio"

@@ -1,3 +1,4 @@
+import React from "react"
 import { VStack as VStackNB } from "native-base"
 import { VStackProps } from "./types"
 

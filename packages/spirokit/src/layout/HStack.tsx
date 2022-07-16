@@ -1,3 +1,4 @@
+import React from "react"
 import { HStack as HStackNB } from "native-base"
 import { HStackProps } from "./types"
 

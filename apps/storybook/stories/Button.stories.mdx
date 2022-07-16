@@ -1,0 +1,604 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack, Button } from "spirokit"
+import { AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { spaceArgTypes, SpaceArgTypesComments } from "./arg-types/StyleProps"
+
+<Meta 
+	title="Components/Button"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Button
+
+---
+
+---
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<Button onPress={() => console.log("Button tapped")}>
+									Confirm
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button
+				onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Variant
+
+You can choose between `primary` is the default `variant` for the `Button` component. Use this variant for the actions that allows the user to accomplish their most common or most important goal.
+
+<Canvas withSource="open">
+	<Story
+		name="Primary"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Primary variant */}
+									<Button
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button onPress={() => console.log("Button tapped")}>Confirm</Button>
+		</Box>
+	</Story>
+	<Story
+		name="Secondary"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Secondary variant */}
+									<Button 
+										variant="secondary"
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+						
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button variant="secondary" onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+	<Story
+		name="Tertiary"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Tertiary variant */}
+									<Button 
+										variant="tertiary" 
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button variant="tertiary" onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Size
+
+You can choose between `sm`, `md`, and `lg` sizes.
+
+<Canvas withSource="open">
+	<Story
+		name="Small"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Small button */}
+									<Button 
+										size="sm" 
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button size="sm" onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+	<Story
+		name="Medium"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Medium button */}
+									<Button 
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+						
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button onPress={() => console.log("Button tapped")}>Confirm</Button>
+		</Box>
+	</Story>
+	<Story
+		name="Large"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Large button */}
+									<Button 
+										size="lg" 
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button size="lg" onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## With icon
+
+You can optionally add an icon both on the `left` and on the `right` side of the button text.
+
+Use the `IconLeftComponent` and `IconRightComponent` props to include the icon you want to display.
+
+<Canvas withSource="open">
+	<Story
+		name="IconLeft"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						import { AcademicCapIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Button with icon on the left */}
+									<Button 
+										IconLeftComponent={AcademicCapIcon} 
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button IconLeftComponent={AcademicCapIcon} onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+	<Story
+		name="IconRight"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Button with icon on the right */}
+									<Button
+										IconRightComponent={AcademicCapIcon} 
+										onPress={() => console.log("Button tapped")}>
+										Confirm
+									</Button>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button IconRightComponent={AcademicCapIcon} onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Destructive
+
+If you want to warn your users about a dangerous action, like closing the account or removing information, you can use the `destructive` flag like this:
+
+<Canvas withSource="open">
+	<Story
+		name="Destructive"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<Button
+									destructive
+									onPress={() => console.log("Button tapped")}>
+									Confirm
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button destructive onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Disabled
+
+You can use the `isDisabled` flag to dinamically disable your button.
+
+<Canvas withSource="open">
+	<Story
+		name="Disabled"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<Button
+									isDisabled
+									onPress={() => console.log("Button tapped")}>
+									Confirm
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button isDisabled onPress={() => console.log("Button tapped")}>
+				Confirm
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Long text
+
+In case you are adding a very long text on your button, this component will only show 2 lines, adding an ellipsis at the end.
+
+<Canvas withSource="open">
+	<Story
+		name="LongText"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<Button
+									onPress={() => console.log("Button tapped")}>
+									Start building your next app today using our new design system
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button onPress={() => console.log("Button tapped")}>
+				Start building your next app today using our new design system
+			</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Button
+									colorMode="light"
+									IconLeftComponent={StarIcon}>
+									{args.children}
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} bg="white" p="4">
+			<Button IconLeftComponent={StarIcon} colorMode="light">Recommended</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Button
+									accentColor="emerald"
+									IconLeftComponent={StarIcon}>
+									{args.children}
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Button IconLeftComponent={StarIcon} accentColor="emerald">Recommended</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Button
+									accentColor="amber"
+									colorMode="light"
+									IconLeftComponent={StarIcon}>
+									{args.children}
+								</Button>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box bg="white" p="4" width={375}>
+			<Button IconLeftComponent={StarIcon} colorMode="light" accentColor="amber">Recommended</Button>
+		</Box>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		children: "Confirm",
+		isDisabled: false,
+		size: "md",
+		destructive: false,
+		IconLeftComponent: undefined,
+		IconRightComponent: undefined,
+		variant: "primary",
+		accentColor: undefined
+	}}
+	argTypes={{
+		children: {
+			name: "children",
+			type: { name: "string", required: false },
+			description: "Plain text that will be rendered inside the button"
+		},
+		isDisabled: {
+			description: "If `true`, the button will be disabled. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		size: {
+			options: ["sm", "md", "lg"],
+			description: "Size of the button. The default value is `md`",
+			control: { type: "radio" },
+			defaultValue: {
+				summary: "md"
+			}
+		},
+		destructive: {
+			description:
+				"Whether the buttton should be renderer as a detructive action or not. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		IconLeftComponent: {
+			description: "**Optional** Component for the left icon",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		IconRightComponent: {
+			description: "**Optional** Component for the left icon",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		variant: {
+			description:
+				"Determines the visual weight of the button. Use primary for the buttons that should attract more attention. The default values is `primary`",
+			defaultValue: {
+				summary: "primary"
+			}
+		},
+		onPress: {
+			description: "Handler to be called when the user taps the button",
+			table: {
+				type: {
+					summary: "(event: GestureResponderEvent) => void"
+				}
+			}
+		},
+		accessibilityLabel: {
+			description: "Improve the UX for users that heavily rely on screen readers",
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional** Allows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		},
+		borderRadius: {
+			description: "**Optional**\n\nRounds the corners of an element's outer border edge",
+			control: { type: "number" },
+			table: {
+				type: {
+					summary: "number"
+				}
+			}
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Button"/>
+	</Box>
+</Story>

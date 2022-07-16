@@ -1,3 +1,4 @@
+import React from "react"
 import { Flex as FlexNB } from "native-base"
 import { FlexProps } from "./types"
 

@@ -1,5 +1,6 @@
 import {
 	Body,
+	Text,
 	Footnote,
 	Subhead,
 	LargeTitle,
@@ -75,6 +76,10 @@ import {
 	ZStackProps
 } from "./layout"
 
+import { usePoppins } from "./hooks/usePoppins"
+import { Pressable, Image, useColorMode, ColorMode } from "native-base"
+import { fontSizes, fontWeights, letterSpacings, lineHeights } from "./theme/tokens"
+
 export {
 	Body,
 	Footnote,
@@ -84,6 +89,7 @@ export {
 	TitleTwo,
 	TitleThree,
 	Caption,
+	Text,
 	Select,
 	SearchBox,
 	Message,
@@ -105,6 +111,10 @@ export {
 	useSpiroKitTheme,
 	SpiroKitProvider,
 	useColorModeValue,
+	usePoppins,
+	useColorMode,
+	Pressable,
+	Image,
 	AspectRatio,
 	Box,
 	Center,
@@ -112,7 +122,11 @@ export {
 	Flex,
 	HStack,
 	VStack,
-	ZStack
+	ZStack,
+	fontSizes,
+	letterSpacings,
+	lineHeights,
+	fontWeights
 }
 
 export type {
@@ -145,5 +159,6 @@ export type {
 	HStackProps,
 	VStackProps,
 	ZStackProps,
-	CenterProps
+	CenterProps,
+	ColorMode
 }

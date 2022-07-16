@@ -1,0 +1,429 @@
+import { TitleThree, Box, Image, PortraitCard, Badge } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { NewspaperIcon } from "react-native-heroicons/outline"
+import { spaceArgTypes, SpaceArgTypesComments } from "./arg-types/StyleProps"
+
+<Meta 
+	title="Components/Portrait card"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Portrait card
+
+---
+
+---
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story 
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { PortraitCard, Badge } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<PortraitCard
+									colorMode="light"
+									BadgeComponent={<Badge>Travel</Badge>} 
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									AssetComponent={<Image source={{ uri: "https://i.imgur.com/1lSpdz3.png" }} alt="Image of a ship"></Image>}>
+								</PortraitCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<PortraitCard 
+				BadgeComponent={<Badge>Travel</Badge>}
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}>
+			</PortraitCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Fixed mode
+
+You can also use the `PortraitCard` component with the content mode set to `fixed`. This means that the image will only take the top section of the card, leaving space for the content below.
+You can use this mode with an icon or with an image, and the component will adapt accordingly.
+
+<Canvas withSource="open">
+	<Story 
+		name="Fixed mode with Image"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { PortraitCard } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							<>
+								return (
+									{/* Fixed mode with image */}
+									<PortraitCard
+										contentMode="fixed"
+										TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+										AssetComponent={<Image source={{ uri: "https://i.imgur.com/1lSpdz3.png" }} alt="Image of a ship"></Image>}>
+									</PortraitCard>
+						
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				contentMode="fixed"
+			>
+			</PortraitCard>
+		</Box>
+	</Story>
+	<Story 
+		name="Fixed mode with Icon"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Fixed mode with icon */}
+									<PortraitCard
+										contentMode="fixed"
+										AssetComponent={NewspaperIcon}
+										TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}>
+									</PortraitCard>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={NewspaperIcon}
+				contentMode="fixed"
+			>
+			</PortraitCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Using badges
+
+You can optionally display a `Badge` in the top right corner of the card. This is especially useful in the following scenarios:
+
+-   Highlight featured or top news
+-   Categories
+-   Price badges for an e-commerce site
+
+<Canvas withSource="open">
+	<Story 
+		name="Using badge and icon"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { PortraitCard, Badge } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<PortraitCard
+									AssetComponent={NewspaperIcon}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									BadgeComponent={<Badge>Travel</Badge>}>
+								</PortraitCard>
+						
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={NewspaperIcon}
+				BadgeComponent={<Badge>Travel</Badge>}
+			>
+			</PortraitCard>
+		</Box>
+	</Story>
+	<Story 
+		name="Using badge and image"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+								<PortraitCard
+									AssetComponent={
+										<Image
+											source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+											alt="Image of a ship"></Image>
+									}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									BadgeComponent={<Badge>Travel</Badge>}>
+								</PortraitCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				BadgeComponent={<Badge>Travel</Badge>}
+			>
+			</PortraitCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story 
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { PortraitCard, Badge } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						import { Image } from "native-base"
+						
+						const App = () => {
+							return (
+								<PortraitCard
+									AssetComponent={
+										<Image
+											source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+											alt="Image of a ship"></Image>
+									}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									BadgeComponent={<Badge>Travel</Badge>}
+									colorMode="light">
+								</PortraitCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} p="4" bg="white">
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={
+					<Image
+						source={{ uri: "https://i.imgur.com/1lSpdz3.png" }}
+						alt="Image of a ship"></Image>
+				}
+				BadgeComponent={<Badge>Travel</Badge>}
+				colorMode="light">
+			</PortraitCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story 
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { PortraitCard, Badge } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<PortraitCard
+									AssetComponent={NewspaperIcon}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									BadgeComponent={<Badge>Travel</Badge>}
+									accentColor="rose">
+								</PortraitCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+					AssetComponent={NewspaperIcon	}
+				BadgeComponent={<Badge>Travel</Badge>}
+				accentColor="rose">
+			</PortraitCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story 
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { PortraitCard, Badge } from "@spirokit/core"
+						import { TitleThree } from "@spirokit/core/typography"
+						import { NewspaperIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<PortraitCard
+									AssetComponent={NewspaperIcon}
+									TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+									BadgeComponent={<Badge>Travel</Badge>}
+									accentColor="emerald"
+									colorMode="light">
+								</PortraitCard>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} p="4" bg="white">
+			<PortraitCard 
+				TitleComponent={<TitleThree>Resting place of Australia's last convict ship</TitleThree>}
+				AssetComponent={NewspaperIcon	}
+				BadgeComponent={<Badge>Travel</Badge>}
+				accentColor="emerald"
+				colorMode="light">
+			</PortraitCard>
+		</Box>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story 
+	name="Arguments Table"
+	argTypes={{
+		TitleComponent: {
+			description: "Component for the card title",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof TitleThree>"
+				}
+			},
+			control: { type: "text" }
+		},
+		BadgeComponent: {
+			description:
+				"**Optional** \n\nComponent for the badge on the top right corner of the card",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Badge>"
+				}
+			},
+			control: { type: "text" }
+		},
+		AssetComponent: {
+			description:
+				"**Optional**\n\nImage or Icon component for the card.\n\nIf you want to learn more about Native Base's Image component, please visit the following [link](https://docs.nativebase.io/3.2.x/image)",
+			table: {
+				type: {
+					summary: "Image"
+				}
+			},
+			control: { disable: true }
+		},
+		contentMode: {
+			options: ["fixed", "floating"],
+			description:
+				"**Optional**\n\nMode for the content of the card. In floating mode, the card image will cover the entire card, with the text floating above. In fixed mode, the image will be rendered over the text",
+			table: {
+				type: {
+					summary: "'fixed' | 'floating'"
+				}
+			},
+			control: { type: "radio" }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description:
+				"**Optional** Allows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="PortraitCard"/>
+	</Box>
+</Story>

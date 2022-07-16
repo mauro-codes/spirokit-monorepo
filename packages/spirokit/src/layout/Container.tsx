@@ -1,3 +1,4 @@
+import React from "react"
 import { Container as ContainerNB } from "native-base"
 import { ContainerProps } from "./types"
 

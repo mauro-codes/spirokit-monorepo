@@ -1,5 +1,6 @@
 import { ColorMode } from "native-base"
 import { ResponsiveValue } from "native-base/lib/typescript/components/types"
+
 import {
 	ISpiroKitColor,
 	ISpiroKitFontSize,

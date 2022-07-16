@@ -6,6 +6,7 @@ import {
 	IFlexProps,
 	IZStackProps
 } from "native-base"
+import { ILinearGradientProps } from "native-base/lib/typescript/components/primitives/Box/types"
 import { IHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack"
 import { IVStackProps } from "native-base/lib/typescript/components/primitives/Stack/VStack"
 import { ResponsiveValue } from "native-base/lib/typescript/components/types"
@@ -21,9 +22,9 @@ type ReplaceColors<Type> = Omit<
 	Type,
 	"backgroundColor" | "bg" | "background" | "bgColor" | "color"
 > & {
-	background?: ISpiroKitColor
-	backgroundColor?: ISpiroKitColor
-	color?: ISpiroKitColor
+	background?: ResponsiveValue<ISpiroKitColor | (string & {}) | ILinearGradientProps>
+	backgroundColor?: ResponsiveValue<ISpiroKitColor | (string & {}) | ILinearGradientProps>
+	color?: ResponsiveValue<ISpiroKitColor | (string & {})>
 }
 
 type ReplaceTypographyTokens<Type> = Omit<
@@ -76,7 +77,9 @@ type RemoveShorthands<Type> = Omit<
 	| "pos"
 >
 
-type ApplySpirokitTokens<Type> = ReplaceTypographyTokens<ReplaceColors<RemoveShorthands<Type>>>
+export type ApplySpirokitTokens<Type> = ReplaceTypographyTokens<
+	ReplaceColors<RemoveShorthands<Type>>
+>
 
 export type BoxProps = ApplySpirokitTokens<IBoxProps> & { ref?: any }
 
