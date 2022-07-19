@@ -77,7 +77,7 @@ import {
 } from "./layout"
 
 import { usePoppins } from "./hooks/usePoppins"
-import { Pressable, Image, useColorMode, ColorMode } from "native-base"
+import { Pressable, Image, useColorMode, ColorMode, Icon } from "native-base"
 import { fontSizes, fontWeights, letterSpacings, lineHeights } from "./theme/tokens"
 
 export {
@@ -114,6 +114,7 @@ export {
 	usePoppins,
 	useColorMode,
 	Pressable,
+	Icon,
 	Image,
 	AspectRatio,
 	Box,

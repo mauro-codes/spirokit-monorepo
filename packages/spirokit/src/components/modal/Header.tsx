@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Box, ColorMode, HStack, IBoxProps, useColorMode } from "native-base"
 import { AccentColor } from "../../theme"
 import { TitleOne, Subhead } from "../typography"
@@ -20,26 +20,9 @@ export const Header: React.FC<HeaderProps> = (props) => {
 	const accentColor = props.accentColor || "primary"
 	const colorMode = props.colorMode || useColorMode().colorMode
 	const subtitleTextColor = useColorModeValue("white", "primaryGray.300", colorMode)
-	const [dynamicBg, setDynamicBg] = useState({})
+	const backgroundColor = useColorModeValue(`${accentColor}.500`, "primaryDark.6", colorMode)
 
-	useEffect(() => {
-		getBackgroundColor()
-	}, [colorMode])
-
-	const getBackgroundColor = () => {
-		setDynamicBg({
-			backgroundColor: {
-				linearGradient: {
-					colors:
-						colorMode === "light"
-							? [`${accentColor}.700`, `${accentColor}.500`, `${accentColor}.400`]
-							: ["primaryDark.6", "primaryDark.6", "primaryDark.6"],
-					start: [0, 0],
-					end: [1, 1]
-				}
-			}
-		})
-	}
+	useEffect(() => {}, [colorMode])
 
 	if (!TitleComponent && !SubtitleComponent) {
 		return (
@@ -53,7 +36,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
 	}
 
 	return (
-		<Box {...dynamicBg}>
+		<Box backgroundColor={backgroundColor}>
 			<HStack padding={4} alignItems="flex-start">
 				<Box flex={1}>
 					{TitleComponent
