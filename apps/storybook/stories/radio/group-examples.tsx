@@ -1,6 +1,5 @@
-import { Box, ColorMode, VStack } from "native-base"
 import React from "react"
-import { AccentColor, Radio } from "spirokit"
+import { AccentColor, Radio, Box, ColorMode, VStack } from "spirokit"
 import { useDarkMode } from "storybook-dark-mode"
 import { ArgTypes, Parameters } from "@storybook/addons"
 import dedent from "ts-dedent"
@@ -120,7 +119,7 @@ const GroupArgumentsTableComponent = (props: GroupArgumentsTableComponentProps) 
 	const accentColor = props.accentColor || "primary"
 
 	return (
-		<Box width={375} p="4">
+		<Box width={375} padding="4">
 			<Radio.Group
 				accentColor={accentColor}
 				colorMode={colorMode}
@@ -192,8 +191,7 @@ const sizeParameters: Parameters = {
 	docs: {
 		source: {
 			code: dedent`
-				import { Radio } from "@spirokit/core"
-				import { VStack } from "native-base"
+				import { Radio, VStack } from "@spirokit/core"
 				
 				const App = () => {
 					return (
@@ -255,8 +253,7 @@ const spacingParameters: Parameters = {
 	docs: {
 		source: {
 			code: dedent`
-				import { Radio } from "@spirokit/core"
-				import { VStack } from "native-base"
+				import { Radio, VStack } from "@spirokit/core"
 				
 				const App = () => {
 					return (
@@ -323,7 +320,7 @@ const colorModeParameters: Parameters = {
 
 const ColorModeComponent = () => {
 	return (
-		<Box width={375} bgColor="white" p="4">
+		<Box width={375} backgroundColor="white" padding="4">
 			<Radio.Group colorMode="light" name="radio-group">
 				<Radio value="1">Option 1</Radio>
 				<Radio value="2">Option 2</Radio>
@@ -356,7 +353,7 @@ const accentColorParameters: Parameters = {
 const AccentColorComponent = () => {
 	const colorMode = useDarkMode() ? "dark" : "light"
 	return (
-		<Box width={375} p="4">
+		<Box width={375} padding="4">
 			<Radio.Group colorMode={colorMode} accentColor={"amber"} name="radio-group">
 				<Radio value="1">Option 1</Radio>
 				<Radio value="2">Option 2</Radio>
@@ -393,7 +390,7 @@ const accentColorAndColorModeParameters: Parameters = {
 const AccentColorAndColorModeComponent = () => {
 	const colorMode = useDarkMode() ? "dark" : "light"
 	return (
-		<Box width={375} bgColor="white" p="4">
+		<Box width={375} backgroundColor="white" padding="4">
 			<Radio.Group
 				defaultValue="2"
 				colorMode={"light"}

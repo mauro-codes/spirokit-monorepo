@@ -25,8 +25,7 @@ import { spaceArgTypes, SpaceArgTypesComments } from "../arg-types/StyleProps"
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -91,8 +90,7 @@ You can use the `isDisabled` flag to dinamically disable your select component.
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -173,8 +171,7 @@ In case you are working with a short list of options, you can disable the search
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -258,8 +255,7 @@ It returns the array of data that will be displayed in the list.
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {	
 							const options = [
@@ -352,8 +348,7 @@ You can use this event to update the state and/or to trigger other side effects 
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {	
 							const options = [
@@ -448,9 +443,7 @@ You can optionally add a message below to let your users now what happened.
 			docs: {
 				source: {
 					code: dedent`
-						import { Select, Message } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
-						import { VStack } from "native-base"
+						import { Select, Message, VStack, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {	
 							const options = [
@@ -567,9 +560,7 @@ You can optionally add a label above your select component by using the `LabelCo
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
-						import { VStack } from "native-base"
+						import { VStack, Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {	
 							const options = [
@@ -673,8 +664,7 @@ You can optionally provide a custom placeholder for your select component. Use t
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -758,8 +748,7 @@ Here's an example of how you can do that
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {	
 							const options = [
@@ -865,8 +854,7 @@ To achieve that level of customization, you can use the following flags:
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -962,8 +950,7 @@ By default, the component will use the globally active color mode.
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -993,7 +980,7 @@ By default, the component will use the globally active color mode.
 			const [dataSource, setDataSource] = React.useState(options)
 			return (
 				<Box height={500} justifyContent="center" alignItems="center">
-					<Box bg="white" p="4" width={375}>
+					<Box background="white" padding="4" width={375}>
 						<Select
 							options={dataSource}
 							ItemComponent={({ item }) => (
@@ -1026,8 +1013,7 @@ By default, the component will use the globally active accent color, defined by 
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -1087,8 +1073,7 @@ Both `colorMode` and `accentColor` can be overriten at the same time
 			docs: {
 				source: {
 					code: dedent`
-						import { Select } from "@spirokit/core"
-						import { ListItemOne } from "./components/ListItemOne"
+						import { Select, ListItemOne } from "@spirokit/core"
 						
 						const App = () => {
 							const options = [
@@ -1119,7 +1104,7 @@ Both `colorMode` and `accentColor` can be overriten at the same time
 			const [dataSource, setDataSource] = React.useState(options)
 			return (
 				<Box height={500} justifyContent="center" alignItems="center">
-					<Box bg="white" p="4" width={375}>
+					<Box background="white" padding="4" width={375}>
 						<Select
 							options={dataSource}
 							ItemComponent={({ item }) => (
