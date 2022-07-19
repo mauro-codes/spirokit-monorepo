@@ -17,8 +17,9 @@ export const parameters = {
 export const decorators = [
 	(Story) => {
 		usePoppins()
+
 		const myTheme = useSpiroKitTheme({
-			initialColorMode: useDarkMode() ? "dark" : "light",
+			useSystemColorMode: false,
 			gradients: false
 		})
 
