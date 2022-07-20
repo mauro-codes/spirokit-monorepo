@@ -1,0 +1,21 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { lineHeights, fontWeights, letterSpacings, fontSizes, usePoppins, Box, VStack, Text, SpiroKitProvider, useSpiroKitTheme, LargeTitle, TitleOne, Footnote, TitleThree, Subhead, Body, Button, HorizontalCard, Avatar, Badge } from "spirokit"
+import { AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { SpaceTokens } from "../../../src/documentation"
+
+<Meta 
+	title="Getting started/Design tokens/Size tokens" 
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+<Story 
+	name="Spacing">
+    <LargeTitle marginBottom={4} marginX={-4}>Spacing</LargeTitle>
+	<SpaceTokens/>
+</Story>

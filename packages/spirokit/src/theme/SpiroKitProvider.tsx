@@ -21,17 +21,6 @@ const getConfig = (options: { gradients: boolean }): INativebaseConfig => {
 		console.info("expo-linear-gradient not available")
 	}
 
-	try {
-		const reactNativeLinearGradient = require("react-native-linear-gradient").default
-		return {
-			dependencies: {
-				"linear-gradient": reactNativeLinearGradient
-			}
-		}
-	} catch (error) {
-		console.info("react-native-linear-gradient not available")
-	}
-
 	return {}
 }
 

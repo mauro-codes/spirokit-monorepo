@@ -1,0 +1,674 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { Box, VStack } from "spirokit"
+import { 
+	ArgumentsTableComponent, 
+	OverrideColorModeComponent, 
+	OverrideAccentColorComponent, 
+	OverrideColorModeAndAccentColorComponent, 
+	IconOnlyAndLabelOnlyComponent,
+	LongLabelInTabComponent,
+	CustomIconSizeComponent,
+	TabArgumentsTableComponent 
+} from "./examples"
+import { spaceArgTypes, SpaceArgTypesComments } from "../../arg-types/StyleProps"
+
+<Meta 
+	title="Components/Tab bar"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Tab bar
+
+The `TabBar` component will allow you to pass the `accentColor` and `colorMode` props. All the customization options will be handled by the `Tab` child component.
+
+For more information, check the "Tab - Arguments Table" section below.
+
+---
+
+---
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Tab Bar Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Discover",
+								icon: HomeIcon
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon
+							}
+						]
+						
+						const App = () => {
+							return (
+								<TabBar>
+									{tabs.map((tab, index) => (
+										<TabBar.Tab
+											key={\`tab-\${index}\`}
+											LabelComponent={<Caption>{tab.label}</Caption>}
+											IconComponent={tab.icon}
+											onPress={() => setActiveTab(index)}
+											isFocused={activeTab === index}
+											accentColor={tab.accentColor}></TabBar.Tab>
+									))}
+								</TabBar>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<ArgumentsTableComponent></ArgumentsTableComponent>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Discover",
+								icon: HomeIcon
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon
+							}
+						]
+						
+						const App = () => {
+							return (
+								<TabBar colorMode="light">
+									{tabs.map((tab, index) => (
+										<TabBar.Tab
+											key={\`tab-with-color-mode-override-\${index}\`}
+											LabelComponent={<Caption>{tab.label}</Caption>}
+											IconComponent={tab.icon}
+											onPress={() => setActiveTab(index)}
+											isFocused={activeTab === index}
+											accentColor={tab.accentColor}></TabBar.Tab>
+									))}
+								</TabBar>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} p="4">
+			<OverrideColorModeComponent></OverrideColorModeComponent>
+		</Box>
+	</Story>
+</Canvas>
+
+## Icons only and Label only
+
+Both the `IconComponent` and `LabelComponent` props are conditionally optionals, meaning that you need to provide at least one of those two props. 
+Otherwhise, the TypeScript compiler with throw you an error. Of course, you can also pass both props as show in the examples above.
+Let's see a "icons only" and a "label only" example:
+
+<Canvas withSource="open">
+	<Story
+		name="Icons only and Label only"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Discover",
+								icon: HomeIcon,
+								accentColor: "blue"
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon,
+								accentColor: "amber"
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon,
+								accentColor: "emerald"
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon,
+								accentColor: "red"
+							}
+						]
+						
+						const App = () => {
+							return (
+								<VStack space={4} width={375} p="4">
+									{/* Icon only */}
+									<TabBar>
+										{tabs.map((tab, index) => (
+											<TabBar.Tab
+												key={\`icon-only-tab-\${index}\`}
+												IconComponent={tab.icon}
+												onPress={() => setActiveTab(index)}
+												isFocused={activeTab === index}></TabBar.Tab>
+										))}
+									</TabBar>
+									
+									{/* Label only */}
+									<TabBar>
+										{tabs.map((tab, index) => (
+											<TabBar.Tab
+												key={\`label-only-tab-\${index}\`}
+												LabelComponent={<Caption>{tab.label}</Caption>}
+												onPress={() => setActiveTab(index)}
+												isFocused={activeTab === index}></TabBar.Tab>
+										))}
+									</TabBar>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<IconOnlyAndLabelOnlyComponent></IconOnlyAndLabelOnlyComponent>
+	</Story>
+</Canvas>
+
+## Long text on each tab
+
+In case you pass long texts in your Tab's label, the Tab Bar will automatically trim them like this:
+
+<Canvas withSource="open">
+	<Story
+		name="Long labels in tabs"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet",
+								icon: HomeIcon,
+								accentColor: "blue"
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon,
+								accentColor: "amber"
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon,
+								accentColor: "emerald"
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon,
+								accentColor: "red"
+							}
+						]
+						
+						const App = () => {
+							return (
+								<TabBar>
+									{tabs.map((tab, index) => (
+										<TabBar.Tab
+											key={\`long-label-tab-\${index}\`}
+											IconComponent={tab.icon}
+											onPress={() => setActiveTab(index)}
+											isFocused={activeTab === index}></TabBar.Tab>
+									))}
+								</TabBar>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<LongLabelInTabComponent></LongLabelInTabComponent>
+	</Story>
+</Canvas>
+
+## Custom tab icon size
+
+<Canvas withSource="open">
+	<Story
+		name="Custom Tab icon size"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet",
+								icon: HomeIcon,
+								accentColor: "blue"
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon,
+								accentColor: "amber"
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon,
+								accentColor: "emerald"
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon,
+								accentColor: "red"
+							}
+						]
+						
+						const App = () => {
+							return (
+								<TabBar>
+									{tabs.map((tab, index) => (
+										<TabBar.Tab
+											key={\`long-label-tab-\${index}\`}
+											IconComponent={tab.icon}
+											iconSize={12}
+											onPress={() => setActiveTab(index)}
+											isFocused={activeTab === index}></TabBar.Tab>
+									))}
+								</TabBar>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<CustomIconSizeComponent></CustomIconSizeComponent>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Discover",
+								icon: HomeIcon,
+								accentColor: "blue"
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon,
+								accentColor: "amber"
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon,
+								accentColor: "emerald"
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon,
+								accentColor: "red"
+							}
+						]
+						
+						const App = () => {
+							return (
+								<>
+									{/* Override accent color at the Tab Bar level. The accent color is not added on each Tab child */}
+									<TabBar accentColor="emerald">
+										{tabs.map((tab, index) => (
+											<TabBar.Tab
+												key={\`tab-with-accent-color-override-\${index}\`}
+												LabelComponent={<Caption>{tab.label}</Caption>}
+												IconComponent={tab.icon}
+												onPress={() => setActiveTab(index)}
+												isFocused={activeTab === index}>
+											</TabBar.Tab>
+										))}
+									</TabBar>
+								
+									{/* Override accent color at the Tab level. In this case, the accent color is passed on each tab child */}
+									<TabBar>
+										{tabs.map((tab, index) => (
+											<TabBar.Tab
+												key={\`tab-with-accent-color-override-\${index}\`}
+												LabelComponent={<Caption>{tab.label}</Caption>}
+												IconComponent={tab.icon}
+												onPress={() => setActiveTab(index)}
+												isFocused={activeTab === index}
+												accentColor={tab.accentColor}>
+											</TabBar.Tab>
+										))}
+									</TabBar>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<OverrideAccentColorComponent></OverrideAccentColorComponent>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { DotsHorizontalIcon, HeartIcon, HomeIcon, SearchIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Discover",
+								icon: HomeIcon,
+								accentColor: "blue"
+							},
+							{
+								label: "Browse",
+								icon: SearchIcon,
+								accentColor: "amber"
+							},
+							{
+								label: "Favorites",
+								icon: HeartIcon,
+								accentColor: "emerald"
+							},
+							{
+								label: "More",
+								icon: DotsHorizontalIcon,
+								accentColor: "red"
+							}
+						]
+						
+						const App = () => {
+							return (
+								<TabBar colorMode="light">
+									{tabs.map((tab, index) => (
+										<TabBar.Tab
+											key={\`tab-with-color-mode-and-accent-color-override-\${index}\`}
+											LabelComponent={<Caption>{tab.label}</Caption>}
+											IconComponent={tab.icon}
+											onPress={() => setActiveTab(index)}
+											isFocused={activeTab === index}
+											accentColor={tab.accentColor}>
+										</TabBar.Tab>
+									))}
+								</TabBar>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<OverrideColorModeAndAccentColorComponent></OverrideColorModeAndAccentColorComponent>
+	</Story>
+</Canvas>
+
+## Tab Bar - Arguments Table
+
+<Story
+	name="Tab Bar Arguments Table"
+	args={{
+		children: undefined,
+		accentColor: undefined,
+		colorMode: undefined
+	}}
+	argTypes={{
+		children: {
+			description: "An array of `Tab` components that allows you to define a label, icon, and accentColor, as well as handling press event.\n\nPlease check the arguments table for the `Tab` component below",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Tab> | React.ReactComponentElement<typeof Tab>[]"
+				}
+			},
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional** Allows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Tab Bar Arguments Table" />
+
+## Tab - Arguments Table
+
+<Canvas>
+	<Story
+		name="Tab Arguments Table"
+		args={{
+			LabelComponent: "Tab label",
+			IconComponent: undefined,
+			iconSize: 6,
+			isFocused: false,
+			onPress: undefined,
+			onLongPress: undefined,
+			accentColor: undefined,
+			colorMode: undefined
+		}}
+		argTypes={{
+			IconComponent: {
+				description: "Component for the tab icon. **Optional** but you need to pass at least `LabelComponent` or this prop",
+				table: {
+					type: {
+						summary: "(props: SvgProps) => JSX.Element"
+					}
+				},
+				control: { disable: true }
+			},
+			iconSize: {
+				description: "**Optional**\n\nUsed to specify a custom size for the tab. The default value is 6",
+				table: {
+					type: {
+						summary: "number"
+					}
+				},
+				control: { type: "number" }
+			},
+			LabelComponent: {
+				description: "Component for the tab label. **Optional** but you need to pass at least `IconComponent` or this prop",
+				table: {
+					type: {
+						summary: "React.ReactComponentElement<typeof Caption>"
+					}
+				},
+				control: { type: "text" }
+			},
+			isFocused: {
+				description: "If `true`, the tab will be focused, meaning that the accent color will be applied. The default value is `false`",
+				type: { name: "boolean", required: false },
+				defaultValue: {
+					summary: false
+				}
+			},
+			onPress: {
+				description: "**Optional**\n\nHandler to be called when the user taps the Tab",
+				table: {
+					type: {
+						summary: "() => void"
+					}
+				},
+				control: { disable: true }
+			},
+			onLongPress: {
+				description: "**Optional**\n\nHandler to be called when the user long-taps the Tab",
+				table: {
+					type: {
+						summary: "() => void"
+					}
+				},
+				control: { disable: true }
+			},
+			colorMode: {
+				options: ["light", "dark"],
+				description: "**Optional** Allows you to override the global color mode to apply a specific color mode for the component",
+				table: {
+					type: {
+						summary: "ColorMode"
+					}
+				},
+				control: { type: "radio" }
+			},
+			accentColor: {
+				options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+				description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+				table: {
+					type: {
+						summary: "AccentColor"
+					}
+				},
+				control: { type: "radio" }
+			}
+		}}
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { TabBar } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const [activeTab, setActiveTab] = useState<number>(0)
+						
+						const tabs = [
+							{
+								label: "Discover",
+								icon: StarIcon
+							}
+						]
+						
+						const App = () => {
+							return (
+								<TabBar>
+									<TabBar.Tab
+										key={"tab-1"}
+										LabelComponent={<Caption>Tap label</Caption>}
+										IconComponent={StarIcon}
+										iconSize={6}>
+									</TabBar.Tab>
+								</TabBar>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			return (
+				<TabArgumentsTableComponent 
+					label={args.LabelComponent} 
+					accentColor={args.accentColor}
+					isFocused={args.isFocused}
+					iconSize={args.iconSize}
+					colorMode={args.colorMode}>
+				</TabArgumentsTableComponent>
+			)
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable story="Tab Arguments Table" />

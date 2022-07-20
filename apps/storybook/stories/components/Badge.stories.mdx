@@ -1,0 +1,346 @@
+import { Box, Badge } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { UserIcon, StarIcon } from "react-native-heroicons/outline"
+import { spaceArgTypes, SpaceArgTypesComments } from "../arg-types/StyleProps"
+
+<Meta 
+	title="Components/Badge"
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}} 
+/>
+
+# Badge
+
+---
+
+---
+
+## Basic example 
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Badge } from "@spirokit/core"
+												
+						const App = () => {
+							return (
+								<Badge>Top 5</Badge>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge   
+				size={"sm"}>{"Top 5"}
+			</Badge>
+		</Box>
+	</Story>
+</Canvas>
+
+## With icon
+
+You can optionally add an icon to the left or to the right of your badge by using the `IconLeftComponent` and `RightIconComponent`.
+In most cases, you will want to use only one side, but it's up to you if you want to add a different icon on each side.
+
+<Canvas withSource="open">
+	<Story
+		name="With left icon"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Badge } from "@spirokit/core"
+						import { StarIcon, UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* With left icon */}
+									<Badge IconLeftComponent={StarIcon}>Recommended</Badge>
+						
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge IconLeftComponent={StarIcon}>Recommended</Badge>
+		</Box>
+	</Story>
+	<Story
+		name="With right icon"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* With right icon */}
+									<Badge IconRightComponent={StarIcon}>Recommended</Badge>
+						
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge IconRightComponent={StarIcon}>Recommended</Badge>
+		</Box>
+	</Story>
+	<Story
+		name="With icons on both sides"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* With icons on both sides */}
+									<Badge 
+										IconLeftComponent={UserIcon} 
+										IconRightComponent={StarIcon}>
+										Recommended
+									</Badge>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge IconLeftComponent={UserIcon} IconRightComponent={StarIcon}>Recommended</Badge>
+		</Box>
+	</Story>
+</Canvas>
+
+## Size
+
+You can choose between `sm` and `md` sizes by using the `size` prop. The default value is `md`
+
+<Canvas withSource="open">
+	<Story
+		name="Small badge"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Badge } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Small badge */}
+									<Badge size="sm" IconLeftComponent={StarIcon}>Recommended</Badge>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge size="sm" IconLeftComponent={StarIcon}>Recommended</Badge>
+		</Box>
+	</Story>
+	<Story
+		name="Medium badge"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Medium badge */}
+									<Badge size="md" IconRightComponent={StarIcon}>Recommended</Badge>
+								</>
+							)
+						}			
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge size="md" IconLeftComponent={StarIcon}>Recommended</Badge>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Badge } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (		
+								<Badge 
+									size="sm" 
+									IconLeftComponent={StarIcon} 
+									colorMode="light">
+									Recommended
+								</Badge>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box bg="white" p="4" alignSelf="flex-start">
+			<Badge size="sm" IconLeftComponent={StarIcon} colorMode="light">Recommended</Badge>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Badge } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Badge 
+									size="sm" 
+									IconLeftComponent={StarIcon} 
+									accentColor="emerald">
+									Recommended
+								</Badge>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Badge size="sm" IconLeftComponent={StarIcon} accentColor="emerald">Recommended</Badge>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Badge } from "@spirokit/core"
+						import { StarIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Badge 
+									size="sm" 
+									IconLeftComponent={StarIcon} 
+									colorMode="light"
+									accentColor="emerald">
+									Recommended
+								</Badge>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box bg="white" p="4" alignSelf="flex-start">
+			<Badge size="sm" IconLeftComponent={StarIcon} colorMode="light" accentColor="emerald">Recommended</Badge>
+		</Box>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		children: "Top 5",
+		size: "sm"
+	}}
+	argTypes={{
+		size: {
+			options: ["sm", "md"],
+			description: "Size of the badge. The default value is `md`",
+			control: { type: "radio" },
+			defaultValue: {
+				summary: "md"
+			}
+		},
+		IconLeftComponent: {
+			description: "**Optional** Component for the left icon",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		IconRightComponent: {
+			description: "**Optional** Component for the left icon",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional** Allows you to override the global color mode to apply a specific color mode for the badge component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Badge"/>
+	</Box>
+</Story>

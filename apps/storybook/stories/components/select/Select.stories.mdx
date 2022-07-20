@@ -1,0 +1,1444 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack, Center, Subhead, Select, Message, ListItemOne } from "spirokit"
+import options from "./Select.options"
+import { spaceArgTypes, SpaceArgTypesComments } from "../../arg-types/StyleProps"
+
+<Meta 
+	title="Components/Select"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Select
+
+## Basic component
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [dataSource, setDataSource] = React.useState(options)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Select
+							options={dataSource}
+							ItemComponent={({ item }) => (
+								<ListItemOne
+									id={item.id}
+									title={item.title}		
+									subtitle={item.subtitle}></ListItemOne>
+							)}
+							startSearchingTitle="Search"
+							startSearchingSubtitle="Enter a search term"
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							modalTitle="Modal title"
+							modalSubtitle="Modal subtitle"
+							emptyResultsTitle="No results"
+							emptyResultsSubtitle="Please try another search term"
+							placeholder="Select..."></Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Disabled
+
+You can use the `isDisabled` flag to dinamically disable your select component.
+
+<Canvas withSource="open">
+	<Story
+		name="Disabled"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									isDisabled
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+			return (
+				<Box width={375}>
+					<Select
+						isDisabled
+						options={options}
+						ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+						keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+						displayValueExtractor={(item) => `${item.title}`}>
+					</Select>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Without search
+
+The select component will include search functionality by default. This is useful if you want to filter a large list.
+In case you are working with a short list of options, you can disable the search functionality using the `includeSearch` flag like this:
+
+<Canvas withSource="open">
+	<Story
+		name="Without Search"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+						
+							return (
+								<Select
+									includeSearch={false}
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Select
+							includeSearch={false}
+							options={options}
+							ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}>
+						</Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Handling `onSearchTermChanged` event
+
+The `onSearchTermChanged` event will allow you to apply a custom logic every time the search term changes.
+You will have access to the `searchTerm` property to perform a custom filter or call an external API.
+It returns the array of data that will be displayed in the list.
+
+<Canvas withSource="open">
+	<Story
+		name="onSearchTermChanged event"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {	
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							const onSearchTermChanged = (searchTerm) => {
+								{/* You could call an API if you want. Use await for async operations */}
+								return options.filter((item) => item.title.includes(searchTerm))	
+							}
+							
+							return (
+								<Select
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}
+									onSearchTermChanged={onSearchTermChanged}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]	
+		
+			const onSearchTermChanged = (searchTerm) => {
+    			return options.filter((item) => item.title.includes(searchTerm))
+    		}
+		
+			return (
+    			<Box height={500} justifyContent="center" alignItems="center">
+    				<Box width={375}>
+    					<Select
+    						options={options}
+    						ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+    						keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+    						displayValueExtractor={(item) => `${item.title}`}
+    						onSearchTermChanged={onSearchTermChanged}>
+    					</Select>
+    				</Box>
+    			</Box>
+    		)
+		}}</Story>
+</Canvas>
+
+## Handling `onItemSelected` event
+
+The `onItemSelected` event will give you access to the entire seleced object.
+You can use this event to update the state and/or to trigger other side effects / custom logic you need.
+
+
+<Canvas withSource="open">
+	<Story
+		name="onItemSelected event"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {	
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							const onItemSelected = (item) => {
+								{/* You can update your state here */}
+				    			if(!item) return
+								Alert.alert("Selected item: " + item.title)	
+							}
+							
+							return (
+								<Select
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}
+									onItemSelected={onItemSelected}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+		
+			const onItemSelected = (item) => {
+    			if(!item) return
+				alert("Selected item: " + item.title)
+    		}
+		
+			return (
+    			<Box height={500} justifyContent="center" alignItems="center">
+    				<Box width={375}>
+    					<Select
+    						options={options}
+    						ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+    						keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+    						displayValueExtractor={(item) => `${item.title}`}
+    						onItemSelected={onItemSelected}>
+    					</Select>
+    				</Box>
+    			</Box>
+    		)
+		}}
+	</Story>
+</Canvas>
+
+## Validation messages
+
+You can use the `error` and `success` flag to display an icon on the right side of the select component.
+You can optionally add a message below to let your users now what happened.
+
+<Canvas withSource="open">
+	<Story
+		name="validation messages"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, Message, VStack, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {	
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<VStack space={6} width={375}>
+									<>
+										{/* With error message */}
+										<Select
+											options={options}
+											ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+											keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+											displayValueExtractor={(item) => item.title}
+											error>
+										</Select>
+										<Message type="error">This field is required</Message>
+									</>
+									<>
+										{/* With success message */}
+										<Select
+											options={options}
+											ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+											keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+											displayValueExtractor={(item) => item.title}
+											success>
+										</Select>
+										<Message type="success">Shipping is available on your city</Message>
+									</>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+			
+			const onItemSelected = (item) => {
+				alert("Selected item: " + item.title)
+			}
+			
+			return (
+				<VStack space={8} height={500} justifyContent="center" alignItems="center">
+					<VStack space={6} width={375}>
+						<>
+							<Select
+								options={options}
+								ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+								keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+								displayValueExtractor={(item) => `${item.title}`}
+								error>
+							</Select>
+							<Message type="error">This field is required</Message>
+						</>
+						<>
+							<Select
+								options={options}
+								ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+								keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+								displayValueExtractor={(item) => `${item.title}`}
+								success>
+							</Select>
+							<Message type="success">Shipping is available on your city</Message>
+						</>
+					</VStack>
+				</VStack>
+			)
+		}}
+    </Story>
+</Canvas>
+
+## Label + required
+
+You can optionally add a label above your select component by using the `LabelComponent` prop like this:
+
+<Canvas withSource="open">
+	<Story
+		name="with label"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {	
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<VStack space={6} width={375}>
+									{/* With label */}
+									<Select
+										options={options}
+										ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+										keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+										displayValueExtractor={(item) => item.title}
+										LabelComponent={<Subhead>City</Subhead>}>
+									</Select>
+									
+									{/* With label + required */}
+									<Select
+										options={options}
+										ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+										keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+										displayValueExtractor={(item) => item.title}
+										LabelComponent={<Subhead>City</Subhead>}
+										required>
+									</Select>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+			
+			return (
+				<VStack space={8} height={500} justifyContent="center" alignItems="center">
+					<VStack space={6} width={375}>
+						<Select
+							options={options}
+							ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							LabelComponent={<Subhead>City</Subhead>}>
+						</Select>
+						<Select
+							options={options}
+							ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							required
+							LabelComponent={<Subhead>City</Subhead>}>
+						</Select>
+					</VStack>
+				</VStack>
+			)
+		}}
+    </Story>
+</Canvas>
+
+## Custom placeholder
+
+You can optionally provide a custom placeholder for your select component. Use the `placeholder` prop like this
+
+<Canvas withSource="open">
+	<Story
+		name="Custom placeholder"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}
+									placeholder="Select your city...">
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Select
+							options={options}
+							ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							placeholder="Select your city...">
+						</Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Loading data from an external API
+
+You can use the `onSearchTermChanged` to trigger a request to an external API and retrieve the results based on the search term.
+
+Here's an example of how you can do that
+
+<Canvas withSource="open">
+	<Story
+		name="Loading data from an external API"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {	
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							const onSearchTermChanged = async (searchTerm) => {
+								const options = await fetch('http://example.com/cities.json')
+								
+								return options.filter((item) => item.title.includes(searchTerm))	
+							}
+							
+							return (
+								<Select
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}
+									onSearchTermChanged={onSearchTermChanged}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]	
+		
+			const onSearchTermChanged = async (searchTerm) => {
+				const response = await fetch(`https://run.mocky.io/v3/5430e362-c07d-48b9-b291-578d29e33a93?searchTerm=${searchTerm}`)				
+				const options = await response.json()
+				return options
+    		}
+		
+			return (
+    			<Box height={500} justifyContent="center" alignItems="center">
+    				<Box width={375}>
+    					<Select
+    						options={options}
+    						ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+    						keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+    						displayValueExtractor={(item) => `${item.title}`}
+    						onSearchTermChanged={onSearchTermChanged}>
+    					</Select>
+    				</Box>
+    			</Box>
+    		)
+		}}
+	</Story>
+</Canvas>
+
+## Customizing messages
+
+You can customize the messages that are displayed when the user is searching, after a search with no results, or when there are no data to display.
+
+You can also specify a title and subtitle for the modal.
+
+To achieve that level of customization, you can use the following flags:
+
+- `modalTitle`: Allows you to define the title for the modal.
+- `modalSubtitle`: Allows you to define the subtitle for the modal.
+- `emptyResultsTitle`: Allows you to define the title that will be displayed when there are no search results to display.
+- `emptyResultsSubtitle`: Allows you to define the subtitle that will be displayed when there are no search results to display.
+- `startSearchingTitle`: Allows you to define the title that will be displayed when the user is about to perform a search.
+- `startSearchingSubtitle`: Allows you to define the subtitle that will be displayed when the user is about to perform a search.
+
+<Canvas withSource="open">
+	<Story
+		name="Customizing messages"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									options={options}
+									ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}
+									modalTitle="Cities"
+									modalSubtitle="Please choose your favorite destination"
+									startSearchingTitle="Next destination?"
+									startSearchingSubtitle="Start searching your next destination"
+									emptyResultsTitle="No luck"
+									emptyResultsSubtitle="The city you are searching is not available">
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const options = [
+				{
+					id: "1",
+					title: "Buenos Aires",
+					subtitle: "Argentina"
+				},
+				{
+					id: "2",
+					title: "New York",
+					subtitle: "United States"
+				},
+				{
+					id: "3",
+					title: "Stockholm",
+					subtitle: "Sweden"
+				},
+				{
+					id: "4",
+					title: "Madrid",
+					subtitle: "Spain"
+				},
+				{
+					id: "5",
+					title: "Paris",
+					subtitle: "France"
+				}
+			]
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Select
+							options={options}
+							ItemComponent={({ item }) => <ListItemOne {...item}></ListItemOne>}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							modalTitle="Cities"
+							modalSubtitle="Please choose your favorite destination"
+							startSearchingTitle="Next destination?"
+							startSearchingSubtitle="Start searching your next destination"
+							emptyResultsTitle="No luck"
+							emptyResultsSubtitle="The city you are searching is not available">
+						</Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+**Disclaimer**: You'll also need to include the optional `colorMode` prop for the `ItemComponent` in order to also override its styles.
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									options={options}
+									colorMode="light"
+									ItemComponent={({ item }) => <ListItemOne {...item} colorMode="light"></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const [dataSource, setDataSource] = React.useState(options)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box background="white" padding="4" width={375}>
+						<Select
+							options={dataSource}
+							ItemComponent={({ item }) => (
+								<ListItemOne
+									id={item.id}
+									title={item.title}
+									subtitle={item.subtitle}
+									colorMode="light"></ListItemOne>
+							)}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							colorMode="light"></Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									options={options}
+									accentColor="rose"
+									ItemComponent={({ item }) => <ListItemOne {...item} colorMode="light"></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const [dataSource, setDataSource] = React.useState(options)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Select
+							options={dataSource}
+							ItemComponent={({ item }) => (
+								<ListItemOne
+									id={item.id}
+									title={item.title}
+									subtitle={item.subtitle}
+									accentColor="rose"></ListItemOne>
+							)}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							accentColor="rose"></Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Select, ListItemOne } from "@spirokit/core"
+						
+						const App = () => {
+							const options = [
+								{
+									id: "1",
+									title: "Buenos Aires",
+									subtitle: "Argentina"
+								},
+								...
+							]
+							
+							return (
+								<Select
+									options={options}
+									accentColor="orange"
+									colorMode="light"
+									ItemComponent={({ item }) => <ListItemOne {...item} accentColor="orange" colorMode="light"></ListItemOne>}
+									keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+									displayValueExtractor={(item) => item.title}>
+								</Select>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const [dataSource, setDataSource] = React.useState(options)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box background="white" padding="4" width={375}>
+						<Select
+							options={dataSource}
+							ItemComponent={({ item }) => (
+								<ListItemOne
+									id={item.id}
+									title={item.title}
+									subtitle={item.subtitle}
+									colorMode="light"
+									accentColor="orange"></ListItemOne>
+							)}
+							keyExtractor={(item, index) => item.id + new Date().getTime() + index}
+							displayValueExtractor={(item) => `${item.title}`}
+							colorMode="light"
+							accentColor="orange"></Select>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		options: undefined,
+		ItemComponent: undefined,
+		keyExtractor: undefined,
+		displayValueExtractor: undefined,
+		isDisabled: false,
+		includeSearch: true,
+		onClose: undefined,
+		onSearchTermChanged: undefined,
+		onItemSelected: undefined,
+		onEndReached: undefined,
+		onEndReachedThreshold: undefined,
+		error: false,
+		success: false,
+		required: false,
+		placeholder: "Select...",
+		value: undefined,
+		modalTitle: "Modal title",
+		modalSubtitle: "Modal subtitle",
+		emptyResultsTitle: "No results",
+		emptyResultsSubtitle: "Please try another search term",
+		startSearchingTitle: "Search",
+		startSearchingSubtitle: "Enter a search term",
+		LabelComponent: undefined,
+	}}
+	argTypes={{
+		options: {
+			description: "Data source for the select component",
+			type: { required: true },
+			table: {
+				type: {
+					summary: "any[]"
+				}
+			},
+			control: { disable: true }
+		},
+		ItemComponent: {
+			description:
+				"Takes an item from `options` and renders it into the select component.\n\nProvides additional metadata like index",
+			type: { required: true },
+			table: {
+				type: {
+					summary: "ListRenderItem"
+				}
+			},
+			control: { disable: true }
+		},
+		keyExtractor: {
+			description:
+				"Used to extract a unique key for a given item at the specified index.\n\nKey is used for caching and as the react key to track item re-ordering",
+			type: { required: true },
+			table: {
+				type: {
+					summary: "ListRenderItem"
+				}
+			},
+			control: { disable: true }
+		},
+		displayValueExtractor: {
+			description:
+				"Used to extract a string after selecting an option.\n\nYou have access to the entire selected object to apply string concatenation or any custom logic you need",
+			type: { required: true },
+			table: {
+				type: {
+					summary: "(item: any) => string"
+				}
+			},
+			control: { disable: true }
+		},
+		isDisabled: {
+			description:
+				"**Optional**\n\nIf `true`, the select component will be disabled. The default value is `false`.",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		includeSearch: {
+			description:
+				"**Optional**\n\nIf `true`, the select component won't include the search box.\n\nYou can set this prop to `true` if you are only rendering a few items and filtering is not necessary.\n\nThe default value is `false`.",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		onClose: {
+			description:
+				"**Optional**\n\nEvent triggered every time the modal is closed.\n\nThis event can be triggered by the following actions:\n\n- The user manually close the modal by tapping the close button\n\n- The user select an option from the list\n\n- The user taps outside the modal (backdrop area)\n\n",
+			table: {
+				type: {
+					summary: "(item: any) => string"
+				}
+			},
+			control: { disable: true }
+		},
+		onSearchTermChanged: {
+			description:
+				"**Optional**\n\nEvent triggered every time the search box change.\n\nYou will need to use this event to filter the options on the select list.\n\nYou can return `any[]` or `Promise<any[]>` in case you need to perform an async operation to retrieve the filtered results from an API.",
+			table: {
+				type: {
+					summary: "(searchTerm: string) => void | any[] | Promise<any[]>"
+				}
+			},
+			control: { disable: true }
+		},
+		onItemSelected: {
+			description:
+				"**Optional**\n\nEvent triggered every time an item is selected.\n\nYou'll get access to the entire object.\n\nThis method is also triggered after clearing the current selection. In that case, the item is `undefined`",
+			table: {
+				type: {
+					summary: "(item?: any) => void"
+				}
+			},
+			control: { disable: true }
+		},
+		onEndReached: {
+			description:
+				"**Optional** \n\nCalled once when the scroll position gets within `onEndReachedThreshold` of the rendered content",
+			table: {
+				type: {
+					summary: "((info: { distanceFromEnd: number }) => void) | null"
+				}
+			},
+			control: { disable: true }
+		},
+		onEndReachedThreshold: {
+			description:
+				"**Optional**\n\nHow far from the end (in units of visible length of the list) the bottom edge of the list must be from the end of the content to trigger the onEndReached callback.\n\nThus a value of 0.5 will trigger onEndReached when the end of the content is within half the visible length of the list",
+			table: {
+				type: {
+					summary: "number"
+				}
+			},
+			defaultValue: {
+				summary: 0.1
+			},
+			control: { type: "number" }
+		},
+		error: {
+			description:
+				"**Optional**\n\nIf `true`, the select component will include a red error icon on the right.\n\nYou can dynamically update this property after performing your form validations to let the user know there is something that need their atention.\n\nThe default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		success: {
+			description:
+				"**Optional**\n\nIf `true`, the select component will include a green success icon on the right.\n\nYou can dynamically update this property after performing an action to let the user know the operation was successful.\n\nThe default values is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		required: {
+			description:
+				"**Optional**\n\nIf `true`, the text input label will include a red asterisk to let the user know that the input is required.\n\nThe default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		placeholder: {
+			description: "**Optional** \n\nPlaceholder for the select component",
+			defaultValue: {
+				summary: "Select..."
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		value: {
+			description:
+				"**Optional** \n\nUse this property to pre-select an item after initialization.\n\nThe component will try to extract the display value from the options.",
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		modalTitle: {
+			description: "**Optional** \n\nText used as title for the modal.",
+			defaultValue: {
+				summary: "Modal title"
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		modalSubtitle: {
+			description: "**Optional** \n\nText used as subtitle for the modal.",
+			defaultValue: {
+				summary: "Modal subtitle"
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		LabelComponent: {
+			description: "**Optional** \n\nComponent for the label",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Subhead>"
+				}
+			},
+			control: { disable: true }
+		},
+		emptyResultsTitle: {
+			description:
+				"**Optional** \n\nText used as title when there are no results to display",
+			defaultValue: {
+				summary: "No results"
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		emptyResultsSubtitle: {
+			description:
+				"**Optional** \n\nText used as subtitle when there are no results to display",
+			defaultValue: {
+				summary: "Please try another search term"
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		startSearchingTitle: {
+			description: "**Optional** \n\nText used as title when the search box is focused",
+			defaultValue: {
+				summary: "Search"
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		startSearchingSubtitle: {
+			description:
+				"**Optional** \n\nText used as subtitle when the search box is focused",
+			defaultValue: {
+				summary: "Enter a search term"
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			},
+			control: { type: "text" }
+		},
+		LabelComponent: {
+			description: "**Optional** \n\nComponent for the label",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Subhead>"
+				}
+			},
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional** Allows you to override the global color mode to apply a specific color mode for this component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Select"/>
+	</Box>
+</Story>

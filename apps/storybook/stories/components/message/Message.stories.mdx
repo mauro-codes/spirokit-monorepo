@@ -1,0 +1,90 @@
+import { Message, Box } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { 
+	spaceArgTypes, 
+	typographyArgTypes, 
+	layoutArgTypes, 
+	flexItemArgTypes, 
+	SpaceArgTypesComments 
+} from "../../arg-types/StyleProps"
+import { argTypes,
+	typesOfMessagesParameters,
+	TypesOfMessagesComponent,
+	colorModeParameters,
+	ColorModeComponent
+} from "./examples.tsx"
+
+<Meta 
+	title="Components/Message"
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}} 
+/>
+
+# Message
+
+---
+
+---
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Message } from "@spirokit/core"
+												
+						const App = () => {
+							return (
+								<Message>Info message</Message>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Message>Info message</Message>
+		</Box>
+	</Story>
+</Canvas>
+
+## Types of messages
+
+You can choose between `info`, `error`, and `success` messages. The default value is `info`
+
+<Canvas withSource="open">
+	<Story
+		name="Types of messages"
+		parameters={typesOfMessagesParameters}>
+		<TypesOfMessagesComponent></TypesOfMessagesComponent>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	argTypes={argTypes}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={{...spaceArgTypes, ...typographyArgTypes, ...layoutArgTypes, ...flexItemArgTypes}}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Message"/>
+	</Box>
+</Story>

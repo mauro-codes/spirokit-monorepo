@@ -1,0 +1,733 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack, Subhead, Input, Button, Message } from "spirokit"
+import { UserIcon, LockClosedIcon, MapIcon, PhoneIcon, MailIcon } from "react-native-heroicons/outline"
+import { spaceArgTypes, SpaceArgTypesComments } from "../arg-types/StyleProps"
+
+<Meta 
+	title="Components/Input"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Input
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		args={{
+			placeholder: "Enter your username...",
+			required: false,
+			error: false,
+			success: false
+		}}
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input 
+									placeholder="Enter your username..."
+									IconLeftComponent={UserIcon}>
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input placeholder="Enter your username..." IconLeftComponent={UserIcon}></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## With icon
+
+<Canvas withSource="open">
+	<Story
+		name="With icon left"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Icon left */}
+									<Input 
+										placeholder="Enter your username..." 
+										IconLeftComponent={UserIcon}>
+									</Input>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input placeholder="Enter your username..." IconLeftComponent={UserIcon}></Input>
+		</Box>
+	</Story>
+	<Story
+		name="With icon right"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Icon right */}
+									<Input 
+										placeholder="Enter your username..." 
+										IconRightComponent={UserIcon}>
+									</Input>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input placeholder="Enter your username..." IconRightComponent={UserIcon}></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## Secure text entry
+
+<Canvas withSource="open">
+	<Story
+		name="Secure Text Entry Icon left"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input } from "@spirokit/core"
+						import { LockClosedIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* Secure text entry - Icon left */}
+									<Input
+										IconLeftComponent={LockClosedIcon} 
+										placeholder="Enter your password..." 
+										secureTextEntry={true}>
+									</Input>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				IconLeftComponent={LockClosedIcon}
+				placeholder="Enter your password..."
+				secureTextEntry={true}></Input>
+		</Box>
+	</Story>
+	<Story
+		name="Secure Text Entry Icon right"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* Secure text entry - Icon right */}
+									<Input
+										IconRightComponent={LockClosedIcon} 
+										placeholder="Enter your password..." 
+										secureTextEntry={true}>
+									</Input>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				IconRightComponent={LockClosedIcon}
+				placeholder="Enter your password..."
+				secureTextEntry={true}></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## With action button
+
+<Canvas withSource="open">
+	<Story
+		name="With action button"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input, Button } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input
+									IconLeftComponent={UserIcon} 
+									placeholder="Pick your username..." 
+									ButtonComponent={
+										<Button onPress={() => console.log("action button pressed")}>Check</Button>
+									}>
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				IconLeftComponent={UserIcon}
+				placeholder="Pick your username..."
+				ButtonComponent={<Button onPress={() => {}}>Check</Button>}></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## With label
+
+<Canvas withSource="open">
+	<Story
+		name="With label"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Subhead, Input } from "@spirokit/core"
+						import { MapIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<>
+									{/* With label */}
+									<Input
+										IconLeftComponent={MapIcon} 
+										placeholder="Enter your adress..." 
+										LabelComponent={
+											<Subhead>Adress</Subhead>
+										}>
+									</Input>
+								
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				IconLeftComponent={MapIcon}
+				placeholder="Enter your adress..."
+				LabelComponent={<Subhead>Adress</Subhead>}></Input>
+		</Box>
+	</Story>
+	<Story
+		name="With label + Required"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+									{/* With label + required */}
+									<Input
+										required
+										IconLeftComponent={MapIcon} 
+										placeholder="Enter your adress..." 
+										LabelComponent={
+											<Subhead>Adress</Subhead>
+										}>
+									</Input>
+								</>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				required
+				IconLeftComponent={MapIcon}
+				placeholder="Enter your adress..."
+				LabelComponent={<Subhead>Adress</Subhead>}></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+	<Story
+		name="Disabled"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input, Button } from "@spirokit/core"
+						import { PhoneIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input
+									isDisabled
+									placeholder="Phone number..." 
+									IconLeftComponent={PhoneIcon} 
+									ButtonComponent={
+										<Button onPress={() => console.log("on verify tapped")}>Verify</Button>
+									}>
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				IconLeftComponent={PhoneIcon}
+				placeholder="Phone number..."
+				ButtonComponent={<Button>Verify</Button>}
+				isDisabled></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## With accessibility label
+
+<Canvas withSource="open">
+	<Story
+		name="With accessibility label"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input } from "@spirokit/core"
+						import { MailIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input
+									placeholder="Mail..." 
+									IconLeftComponent={MailIcon} 
+									accessibilityLabel="Please, enter your email">
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<Input
+				placeholder="Mail..."
+				IconLeftComponent={MailIcon}
+				accessibilityLabel="Please, enter your email"></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## With validation errors
+
+<Canvas withSource="open">
+	<Story
+		name="With validation errors"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Input, Message } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<VStack space={1}>
+									<Input
+										placeholder="User..."
+										error
+										IconLeftComponent={UserIcon}>
+									</Input>
+									<Message type="error">
+										Something went wrong
+									</Message>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<VStack space={1} width={375}>
+			<Input placeholder="User..." error IconLeftComponent={UserIcon}></Input>
+			<Message type="error">Something went wrong</Message>
+		</VStack>
+	</Story>
+</Canvas>
+
+## Success
+
+<Canvas withSource="open">
+	<Story
+		name="Success"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Input, Message } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<VStack space={1}>
+									<Input
+										placeholder="User..."
+										success
+										IconLeftComponent={UserIcon}>
+									</Input>
+									<Message type="success">
+										Username available
+									</Message>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<VStack space={1} width={375}>
+			<Input placeholder="User..." success IconLeftComponent={UserIcon}></Input>
+			<Message type="success">Username available</Message>
+		</VStack>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input 
+									placeholder="Enter your username..." 
+									IconLeftComponent={UserIcon}
+									colorMode="light">
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} bg="white" p="4" alignItems="flex-start">
+			<Input placeholder="Enter your username..." IconLeftComponent={UserIcon} colorMode="light"></Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input, Button } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input 
+									placeholder="Enter your username..." 
+									IconLeftComponent={UserIcon}
+									accentColor="amber"
+									ButtonComponent={
+										<Button onPress={() => console.log("action button pressed")}>Check</Button>
+									}>
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Input 
+				placeholder="Enter your username..." 
+				IconLeftComponent={UserIcon}
+				accentColor="amber"
+				ButtonComponent={
+					<Button onPress={() => console.log("action button pressed")}>Check</Button>
+				}>
+			</Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Input, Button } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							return (
+								<Input 
+									placeholder="Enter your username..." 
+									IconLeftComponent={UserIcon}
+									accentColor="red"
+									colorMode="light"
+									ButtonComponent={
+										<Button onPress={() => console.log("action button pressed")}>Check</Button>
+									}>
+								</Input>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} bg="white" p="4" alignItems="flex-start">
+			<Input 
+				placeholder="Enter your username..." 
+				IconLeftComponent={UserIcon}
+				accentColor="red"
+				colorMode="light"
+				ButtonComponent={
+					<Button onPress={() => console.log("action button pressed")}>Check</Button>
+				}>
+			</Input>
+		</Box>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		value: "",
+		placeholder: "Enter your username...",
+		required: false,
+		error: false,
+		success: false
+	}}
+	argTypes={{
+		IconLeftComponent: {
+			description: "**Optional**\n\nComponent for the left icon",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		IconRightComponent: {
+			description: "**Optional**\n\nComponent for the left icon",
+			table: {
+				type: {
+					summary: "(props: SvgProps) => JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		required: {
+			description:
+				"**Optional**\n\nIf `true`, the text input label will include a red asterisk to let the user know that the input is required. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		error: {
+			description:
+				"**Optional**\n\nIf `true`, the text input will include a red warning icon to let the user know that the input is not valid or something went wrong. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		success: {
+			description:
+				"**Optional**\n\nIf `true`, the text input will include a green success icon to let the user know that the input is valid or to provide feedback about something that happened. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		ButtonComponent: {
+			description: "**Optional** Component for the action button on the right",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Button>"
+				}
+			},
+			control: { disable: true }
+		},
+		LabelComponent: {
+			description: "**Optional** Component for the label",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Subhead>"
+				}
+			},
+			control: { disable: true }
+		},
+		ref: {
+			description: "**Optional** Component ref",
+			table: {
+				type: {
+					summary: "RefObject<Input>"
+				}
+			},
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description:
+				"**Optional** Allows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		},
+		isDisabled: {
+			description: "**Optional**\n\nIf `true`, the input will be disabled. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			},
+			table: {
+				type: {
+					summary: "boolean"
+				}
+			}
+		},
+		placeholder: {
+			description: "**Optional**\n\nPlaceholder for the input component",
+			defaultValue: {
+				summary: "Search..."
+			},
+			table: {
+				type: {
+					summary: "string"
+				}
+			}
+		},
+		onChangeText: {
+			description: "**Optional**\n\nTriggered every time the input value change",
+			table: {
+				type: {
+					summary: "(value: string) => void"
+				}
+			}
+		},
+		onFocus: {
+			description: "**Optional**\n\nTriggered when the input is focused",
+			table: {
+				type: {
+					summary: "(event: NativeSyntheticEvent<TextInputFocusEventData>) => void"
+				}
+			}
+		},
+		onBlur: {
+			description: "**Optional**\n\nTriggered every time the user leaves the input",
+			table: {
+				type: {
+					summary: "(event: NativeSyntheticEvent<TextInputFocusEventData>) => void"
+				}
+			}
+		},
+		accessibilityLabel: {
+			description: "**Optional**\n\nAccessibility prop so people who use VoiceOver know what element they have selected. Voice over will read this string",
+			table: {
+				type: {
+					summary: "string"
+				}
+			}
+		},
+		value: {
+			description: "**Optional**\n\nvalue for the input component.",
+			table: {
+				type: {
+					summary: "string"
+				}
+			}
+		},
+		secureTextEntry: {
+			description: "**Optional**\n\nIf `true`, the input will mask the value of the input. This can be useful for password inputs. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			},
+			table: {
+				type: {
+					summary: "boolean"
+				}
+			}
+		},
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Input"/>
+	</Box>
+</Story>

@@ -1,0 +1,507 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack, Button, SearchBox } from "spirokit"
+import { spaceArgTypes, SpaceArgTypesComments } from "../arg-types/StyleProps"
+
+<Meta 
+	title="Components/Search box"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Search Box
+
+---
+
+---
+
+## Basic example
+
+A basic example of a Search Box without icons or action buttons.
+You can use `onChangeText` to get updates and trigger a network request or perform any kind of search filter.
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox 
+									hasIcon={false}
+									onChangeText={(searchTerm) => {
+										console.log(searchTerm)
+									}}>
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox
+				hasIcon={false} 
+				onChangeText={(searchTerm) => {
+					console.log(searchTerm)
+				}}></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## With icon
+
+By default, this component will include a search icon on the left. You can hide it by setting the `hasIcon` prop to `false`.
+
+<Canvas withSource="open">
+	<Story
+		name="With icon"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox
+									onChangeText={(searchTerm) => {
+										console.log(searchTerm)
+									}}>
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox
+				onChangeText={(searchTerm) => {
+					console.log(searchTerm)
+				}}></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## Disabled
+
+By default, this component will appear enabled. You can disable it by setting the `isDisabled` prop to `true`.
+
+<Canvas withSource="open">
+	<Story
+		name="Disabled"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox isDisabled></SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox isDisabled></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## With custom placeholder
+
+This component allows you to customize the placeholder for the search box
+
+<Canvas withSource="open">
+	<Story
+		name="With custom placeholdeer"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox placeholder="Country or city"></SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox placeholder="Country or city..."></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## With default value
+
+You can set a initial value for the search box component. The `onChangeText` event will be automatically triggered after initialization, so you can handle that first change an apply an initial filter
+
+<Canvas withSource="open">
+	<Story
+		name="With default value"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox defaultValue="Teatro colón"></SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox defaultValue="Teatro colón"></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## With button
+
+You can include an additional action button on the right using the `ButtonComponent` prop. This will give you complete freedom to customize your button, listen to events, change the style, etc.
+
+<Canvas withSource="open">
+	<Story
+		name="With action button"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox, Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox
+									ButtonComponent={
+										<Button
+											onPress={() => {
+												console.log("button tapped")
+											}}>
+											Search
+										</Button>
+									}>
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox
+				ButtonComponent={
+					<Button
+						onPress={() => {
+							console.log("button tapped")
+						}}>
+						Search
+					</Button>
+				}></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## With accessibility label
+
+You can include an accessibility label to improve the UX for users that heavily rely on screen readers.
+
+<Canvas withSource="open">
+	<Story
+		name="With accessibility label"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox
+									accessibilityLabel="Enter a country or city name to search for">
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375}>
+			<SearchBox accessibilityLabel="Enter a country or city name to search for"></SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox
+									colorMode="light" 
+									onChangeText={(searchTerm) => {
+										console.log(searchTerm)
+									}}>
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} bg="white" p="4" alignItems="flex-start">
+			<SearchBox
+				colorMode="light" 
+				onChangeText={(searchTerm) => {
+					console.log(searchTerm)
+				}}>
+			</SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox, Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox
+									ButtonComponent={
+										<Button
+											onPress={() => {
+												console.log("button tapped")
+											}}>
+											Search
+										</Button>
+									}
+									accentColor="emerald" 
+									onChangeText={(searchTerm) => {
+										console.log(searchTerm)
+									}}>
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<SearchBox
+				ButtonComponent={
+					<Button
+						onPress={() => {
+							console.log("button tapped")
+						}}>
+						Search
+					</Button>
+				}
+				accentColor="emerald" 
+				onChangeText={(searchTerm) => {
+					console.log(searchTerm)
+				}}>
+			</SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { SearchBox, Button } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<SearchBox
+									ButtonComponent={
+										<Button
+											onPress={() => {
+												console.log("button tapped")
+											}}>
+											Search
+										</Button>
+									}
+									accentColor="orange"
+									colorMode="light" 
+									onChangeText={(searchTerm) => {
+										console.log(searchTerm)
+									}}>
+								</SearchBox>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} bg="white" p="4" alignItems="flex-start">
+			<SearchBox
+				ButtonComponent={
+					<Button
+						onPress={() => {
+							console.log("button tapped")
+						}}>
+						Search
+					</Button>
+				}
+				accentColor="orange"
+				colorMode="light" 
+				onChangeText={(searchTerm) => {
+					console.log(searchTerm)
+				}}>
+			</SearchBox>
+		</Box>
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	argTypes={{
+		hasIcon: {
+			name: "hasIcon",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: true
+			},
+			description:
+				"**Optional**\n\nIf `true`, the search box will include a search icon on the left. The default value is `true`test"
+		},
+		defaultValue: {
+			description:
+				"**Optional**\n\nAllows you to initialize the search box component with a default value",
+			defaultValue: {
+				summary: "undefined"
+			}
+		},
+		isDisabled: {
+			description:
+				"**Optional**\n\nIf `true`, the search box will be disabled. The default value is `false`",
+			defaultValue: {
+				summary: false
+			}
+		},
+		placeholder: {
+			description: "**Optional**\n\nPlaceholder for the search box component",
+			defaultValue: {
+				summary: "Search..."
+			}
+		},
+		ButtonComponent: {
+			description: "**Optional**\n\nComponent for the action button on the right",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Button>"
+				}
+			},
+			control: { disable: true }
+		},
+		onChangeText: {
+			description: "**Optional**\n\nTriggered every time the search term change",
+			table: {
+				type: {
+					summary: "(searchTerm: string) => void"
+				}
+			}
+		},
+		onFocus: {
+			description: "**Optional**\n\nTriggered every time the search box is focused"
+		},
+		onBlur: {
+			description: "**Optional**\n\nTriggered every time the search box loose focus"
+		},
+		accessibilityLabel: {
+			description:
+				"**Optional**\n\nImprove the UX for users that heavily rely on screen readers",
+			defaultValue: {
+				summary: "undefined"
+			}
+		},
+		backgroundColor: {
+			description:
+				"**Optional**\n\nAllows you to set a custom background color for the Search Box. The default value is 'transparent'"
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional**\n\nAllows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional**\n\nAllows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/> 
+		<SpaceArgTypesComments componentName="SearchBox"/>
+	</Box>
+</Story>

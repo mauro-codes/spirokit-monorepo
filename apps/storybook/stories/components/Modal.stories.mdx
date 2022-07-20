@@ -1,0 +1,604 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack, HStack, Center, TitleOne, TitleThree, Subhead, Modal, Input, Button, SearchBox } from "spirokit"
+import { UserIcon, LockClosedIcon, MapIcon, PhoneIcon, MailIcon } from "react-native-heroicons/outline"
+
+<Meta 
+	title="Components/Modal"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Modal
+
+## Basic usage
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, HStack, TitleOne, Subhead, Modal, Input, Button } from "@spirokit/core"
+						import { UserIcon, MapIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {							
+							const [isOpen, setIsOpen] = React.useState(false)
+							
+							return (
+								<Modal
+									TitleComponent={<TitleOne>Welcome!</TitleOne>}
+									SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+									isOpen={isOpen}
+									onClose={() => setIsOpen(false)}
+									BodyComponent={
+										{/* Dynamic modal body goes here */}
+										<VStack space={4} padding={4}>
+											<Input
+												placeholder="Enter your name..."
+												LabelComponent={<Subhead>Username</Subhead>}
+												required={true}
+												IconLeftComponent={UserIcon}>
+											</Input>
+											<Input
+												placeholder="Enter your address..."
+												LabelComponent={<Subhead>Address</Subhead>}
+												required={true}
+												IconLeftComponent={MapIcon}>
+											</Input>
+										</VStack>
+										{/* End Dynamic modal body */}
+									}
+									FooterComponent={
+										<HStack justifyContent="space-between">
+											<Button size="sm" onPress={() => setIsOpen(false)} variant="tertiary">Cancel</Button>
+											<Button size="sm">Confirm</Button>
+										</HStack>
+									}>
+								</Modal>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+				        <Button onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Modal
+							isOpen={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Welcome!</TitleOne>}
+							SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+							BodyComponent={
+								<VStack space={4} padding={4}>
+									<Input
+										placeholder="Enter your name..."
+										LabelComponent={<Subhead>Username</Subhead>}
+										required={true}
+										IconLeftComponent={UserIcon}>
+									</Input>
+									<Input
+										placeholder="Enter your address..."
+										LabelComponent={<Subhead>Address</Subhead>}
+										required={true}
+										IconLeftComponent={MapIcon}>
+									</Input>
+								</VStack>
+							}
+							FooterComponent={
+								<HStack justifyContent="space-between" p={4}>
+									<Button size="sm" onPress={() => setIsOpen(false)} variant="tertiary">Cancel</Button>
+									<Button size="sm">Confirm</Button>
+								</HStack>
+							}>
+						</Modal>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Without title and subtitle
+
+Both `TitleComponent` and `SubtitleComponent` are optional props. If you don't specify either, the top section of the modal will dissapear, only leaving the close button.
+
+<Canvas withSource="open">
+	<Story
+		name="Without heading"
+		args={{
+			TitleComponent: "Welcome!",
+			SubtitleComponent: "Please, complete the following information",
+			colorMode: undefined,
+			accentColor: undefined
+		}}
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, HStack, Subhead, Modal, Input, Button } from "@spirokit/core"
+						import { UserIcon, MapIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {							
+							return (
+								<Modal
+									isOpen={false}
+									BodyComponent={
+										{/* Dynamic modal body goes here */}
+										<VStack space={4} padding={4}>
+											<Input
+												placeholder="Enter your name..."
+												LabelComponent={<Subhead>Username</Subhead>}
+												required={true}
+												IconLeftComponent={UserIcon}>
+											</Input>
+											<Input
+												placeholder="Enter your address..."
+												LabelComponent={<Subhead>Address</Subhead>}
+												required={true}
+												IconLeftComponent={MapIcon}>
+											</Input>
+										</VStack>
+										{/* End Dynamic modal body */}
+									}
+									FooterComponent={
+										<HStack justifyContent="space-between">
+											<Button size="sm" variant="tertiary">Cancel</Button>
+											<Button size="sm">Confirm</Button>
+										</HStack>
+									}>
+								</Modal>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+				        <Button onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Modal
+							isOpen={isOpen}
+							onClose={() => setIsOpen(false)}
+							colorMode={args.colorMode}
+							accentColor={args.accentColor}
+							BodyComponent={
+								<VStack space={4} padding={4}>
+									<Input
+										colorMode={args.colorMode}
+										accentColor={args.accentColor}
+										placeholder="Enter your name..."
+										LabelComponent={<Subhead>Username</Subhead>}
+										required={true}
+										IconLeftComponent={UserIcon}>
+									</Input>
+									<Input
+										colorMode={args.colorMode}
+										accentColor={args.accentColor}
+										placeholder="Enter your address..."
+										LabelComponent={<Subhead>Address</Subhead>}
+										required={true}
+										IconLeftComponent={MapIcon}>
+									</Input>
+								</VStack>
+							}
+							FooterComponent={
+								<HStack justifyContent="space-between" p={4}>
+									<Button size="sm" variant="tertiary">Cancel</Button>
+									<Button size="sm">Confirm</Button>
+								</HStack>
+							}>
+						</Modal>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Header component
+
+You can optionally attach your custom components to the modal header using the `HeaderComponent` prop. It will be rendered below the title and subtitle. 
+
+This could come in handy when the body of your modal in long enough to need a scroll, and you want a sticky component that is always visible.
+
+Here's an example adding a `SearchBox`
+
+<Canvas withSource="open">
+	<Story
+		name="Header component"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Box, TitleOne, Subhead, Modal, Input, SearchBox } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {
+							const onSearchTermChanged = (searchTerm) => {
+								console.log(searchTerm)
+							}							
+							return (
+								<Modal
+									TitleComponent={<TitleOne>{args.TitleComponent}</TitleOne>}
+									SubtitleComponent={<Subhead>{args.SubtitleComponent}</Subhead>}
+									isOpen={true}
+									HeaderComponent={
+										<Box padding={4}>
+											<SearchBox
+												onChangeText={onSearchTermChanged}>
+											</SearchBox>
+										</Box>
+									}
+									BodyComponent={
+										{/* Dynamic modal body goes here */}
+										<VStack space={4} padding={4}>
+											<Input
+												placeholder="Enter your name..."
+												LabelComponent={<Subhead>Username</Subhead>}
+												required={true}
+												IconLeftComponent={UserIcon}>
+											</Input>
+										</VStack>
+									}>
+								</Modal>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const onSearchTermChanged = (searchTerm) => {
+				console.log(searchTerm)
+			}
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+				        <Button onPress={() => setIsOpen(true)}>Open modal</Button>						
+						<Modal
+							isOpen={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Welcome!</TitleOne>}
+							SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+							HeaderComponent={
+								<Box padding={4}>
+									<SearchBox
+										onChangeText={onSearchTermChanged}>
+									</SearchBox>
+								</Box>
+							}
+							BodyComponent={
+								<VStack space={4} padding={4}>
+									<Input
+										placeholder="Enter your name..."
+										LabelComponent={<Subhead>Username</Subhead>}
+										required={true}
+										IconLeftComponent={UserIcon}>
+									</Input>
+								</VStack>
+							}>
+						</Modal>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, TitleOne, Subhead, Modal, Input, Button } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {							
+							return (
+								<Modal
+									TitleComponent={<TitleOne>Welcome!</TitleOne>}
+									SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+									isOpen={true}
+									colorMode="light"
+									BodyComponent={
+										{/* Dynamic modal body goes here */}
+										{/* Make sure to also specify the colorMode on each component within your body */}
+										<VStack space={4} padding={4}>
+											<Input
+												colorMode="light"
+												placeholder="Enter your name..."
+												LabelComponent={<Subhead>Username</Subhead>}
+												required={true}
+												IconLeftComponent={UserIcon}>
+											</Input>
+										</VStack>
+									}>
+								</Modal>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+				        <Button colorMode="light" onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Modal
+							isOpen={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Welcome!</TitleOne>}
+							SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+							colorMode="light"
+							BodyComponent={
+								<VStack space={4} padding={4}>
+									<Input
+										colorMode="light"
+										placeholder="Enter your name..."
+										LabelComponent={<Subhead>Username</Subhead>}
+										required={true}
+										IconLeftComponent={UserIcon}>
+									</Input>
+								</VStack>
+							}>
+						</Modal>
+					</Box>
+				</Box>	
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, TitleOne, Subhead, Modal, Input } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {							
+							return (
+								<Modal
+									TitleComponent={<TitleOne>Welcome!</TitleOne>}
+									SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+									isOpen={true}
+									accentColor="rose"
+									BodyComponent={
+										{/* Dynamic modal body goes here */}
+										{/* Make sure to also specify the accentColor on each component within your body */}
+										<VStack space={4} padding={4}>
+											<Input
+												accentColor="rose"
+												placeholder="Enter your name..."
+												LabelComponent={<Subhead>Username</Subhead>}
+												required={true}
+												IconLeftComponent={UserIcon}>
+											</Input>
+										</VStack>
+									}>
+								</Modal>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+				        <Button accentColor="rose" onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Modal
+							isOpen={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Welcome!</TitleOne>}
+							SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+							accentColor="rose"
+							BodyComponent={
+								<VStack space={4} padding={4}>
+									<Input
+										accentColor="rose"
+										placeholder="Enter your name..."
+										LabelComponent={<Subhead>Username</Subhead>}
+										required={true}
+										IconLeftComponent={UserIcon}>
+									</Input>
+								</VStack>
+							}>
+						</Modal>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, TitleOne, Subhead, Modal, Input } from "@spirokit/core"
+						import { UserIcon } from "react-native-heroicons/outline"
+						
+						const App = () => {							
+							return (
+								<Modal
+									TitleComponent={<TitleOne>Welcome!</TitleOne>}
+									SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+									isOpen={true}
+									colorMode="light"
+									accentColor="rose"
+									BodyComponent={
+										{/* Dynamic modal body goes here */}
+										{/* Make sure to also specify the accentColor and the colorMode on each component within your body */}
+										<VStack space={4} padding={4}>
+											<Input
+												colorMode="light"
+												accentColor="rose"
+												placeholder="Enter your name..."
+												LabelComponent={<Subhead>Username</Subhead>}
+												required={true}
+												IconLeftComponent={UserIcon}>
+											</Input>
+										</VStack>
+									}>
+								</Modal>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{() => {
+			const [isOpen, setIsOpen] = React.useState(false)
+			return (
+				<Box height={500} justifyContent="center" alignItems="center">
+					<Box width={375}>
+						<Button accentColor="rose" colorMode="light" onPress={() => setIsOpen(true)}>Open modal</Button>
+						<Modal
+							isOpen={isOpen}
+							onClose={() => setIsOpen(false)}
+							TitleComponent={<TitleOne>Welcome!</TitleOne>}
+							SubtitleComponent={<Subhead>Please, complete the following information</Subhead>}
+							colorMode="light"
+							accentColor="rose"
+							BodyComponent={
+								<VStack space={4} padding={4}>
+									<Input
+										colorMode="light"
+										accentColor="rose"
+										placeholder="Enter your name..."
+										LabelComponent={<Subhead>Username</Subhead>}
+										required={true}
+										IconLeftComponent={UserIcon}>
+									</Input>
+								</VStack>
+							}>
+						</Modal>
+					</Box>
+				</Box>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		TitleComponent: "Welcome!",
+		SubtitleComponent: "Please, complete the following information",
+		colorMode: undefined,
+		accentColor: undefined
+	}}
+	argTypes={{
+		TitleComponent: {
+			description: "**Optional** \n\nText used as title for the modal.",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof TitleOne>"
+				}
+			},
+			control: { type: "text" }
+		},
+		SubtitleComponent: {
+			description: "**Optional** \n\nText used as subtitle for the modal.",
+			table: {
+				type: {
+					summary: "React.ReactComponentElement<typeof Subhead>"
+				}
+			},
+			control: { type: "text" }
+		},
+		HeaderComponent: {
+			description: "Component for modal's header",
+			table: {
+				type: {
+					summary: "JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		BodyComponent: {
+			description: "Component for modal's body",
+			table: {
+				type: {
+					summary: "JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		FooterComponent: {
+			description: "Component for modal's footer",
+			table: {
+				type: {
+					summary: "JSX.Element"
+				}
+			},
+			control: { disable: true }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional** Allows you to override the global color mode to apply a specific color mode for this component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional** Allows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		}
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />

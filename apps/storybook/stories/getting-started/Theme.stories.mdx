@@ -1,0 +1,182 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { usePoppins, Box, VStack, Text, HStack, SpiroKitProvider, useSpiroKitTheme, LargeTitle, Footnote, TitleThree, Subhead, Button, HorizontalCard, Avatar, Badge } from "spirokit"
+import { AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { FontCardList, AccentColorSwatches, GrayColorSwatches, CustomAccentColor } from "../../src/documentation"
+
+<Meta 
+	title="Getting started/Theme"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Accent colors
+
+SpiroKit includes 7 accent colors ready to use in your apps as primary color
+
+# Setup accent color and type of gray for your project.
+
+While working with SpiroKit, you'll always need to wrap your entire app with the `SpiroKitProvider`, which requires you to pass the `theme` prop.
+
+Use the `useSpiroKit` custom hook to setup your theme. This custom hook allows you to pass a configuration object to specify which accent color and type of gray you want to use.
+
+Here's a basic example:
+
+<Canvas withSource="open">
+	<Story 
+		name="Setup accent color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button, SpiroKitProvider, useSpiroKitTheme } from "@spirokit/core"
+						
+						// Using "Indigo" as accent color, and "Neutral gray" as a type of gray 
+						const myTheme = useSpiroKitTheme()
+						
+						const App = () => {
+							return (
+								<SpiroKitProvider theme={myTheme}>
+									{/* Button component inheriting the theme */}
+									<Button>Confirm</Button>
+								</SpiroKitProvider>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<VStack space={4} width={375}>
+			<Button>Tap</Button>
+		</VStack>
+	</Story>
+</Canvas>
+
+Let's say you want to use "Orange" as your accent color, and you want to use the "Warm gray" variant. Here's another example with those preferences:
+
+<Canvas withSource="open">
+	<Story 
+		name="Changing the accent color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button, SpiroKitProvider, useSpiroKitTheme } from "@spirokit/core"
+						
+						const myTheme = useSpiroKitTheme({
+							colors: {
+								primary: "orange",
+								primaryGray: "warmGray"
+							}
+						})
+						
+						const App = () => {
+							return (
+								<SpiroKitProvider theme={myTheme}>
+									{/* Button component inheriting the new accent color */}
+									<Button>Confirm</Button>
+								</SpiroKitProvider>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<VStack space={4} width={375}>
+			<Button accentColor="orange">Tap</Button>
+		</VStack>
+	</Story>
+</Canvas>
+
+# Using a custom Accent color
+
+If you want to apply a different accent color to your project, you can also pass your own configuration object. 
+Let's add a new color called "Steel blue". We are going to use [this tool](https://smart-swatch.netlify.app/#4682b4) to generate the entire scale, going from 100 to 900:
+
+<Canvas withSource="open">
+	<Story 
+		name="Using a custom Accent color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Button, SpiroKitProvider, useSpiroKitTheme } from "@spirokit/core"
+						
+						const steelBlue = {
+							100: "#c3dbef",
+							200: "#a0c2de",
+							300: "#7ca9ce",
+							400: "#5a91bf",
+							500: "#4077a5",
+							600: "#305d82",
+							700: "#20425e",
+							800: "#0d283b",
+							900: "#000e1a"
+						}
+						
+						const myTheme = useSpiroKitTheme({
+							colors: {
+								primary: steelBlue
+							}
+						})
+						
+						const App = () => {
+							return (
+								<SpiroKitProvider theme={myTheme}>
+									{/* Button and horizontal card components inheriting the new accent color */}
+									<Button>Tap</Button>
+									<HorizontalCard>
+										...
+									</HorizontalCard>
+								</SpiroKitProvider>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<CustomAccentColor/>
+	</Story>
+</Canvas>
+
+## Overriding the Accent color in a component.
+
+The entire component library will inherit and use the primary color you defined. However, you can always override the accent color for a component by passing the optional `accentColor` prop like this:
+
+<Canvas withSource="open">
+	<Story 
+		name="Overriding the accent color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Button } from "@spirokit/core"
+						
+						const HomeScreen = () => {
+							<VStack space={4}>
+								{/* Indigo accent color by default */}
+								<Button>Tap</Button>
+								
+								{/* Using a custom accent color */}
+								<Button accentColor="orange">Tap</Button>
+								<Button accentColor="rose">Tap</Button>
+							</VStack>
+						}
+					`
+				}
+			}
+		}}>
+		<HStack space={8}>
+			<VStack space={4} width={375}>
+				<Button>Tap</Button>
+				<Button accentColor="orange">Tap</Button>
+				<Button accentColor="rose">Tap</Button>
+			</VStack>
+		</HStack>
+	</Story>
+</Canvas>
+

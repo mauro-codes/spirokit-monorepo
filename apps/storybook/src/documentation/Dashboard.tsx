@@ -29,6 +29,7 @@ const SelectIcon = require("../../assets/dashboard/select.png")
 const TextAreaIcon = require("../../assets/dashboard/text-area.png")
 const TabBarIcon = require("../../assets/dashboard/tab-bar.png")
 const RadioButtonIcon = require("../../assets/dashboard/radio-button.png")
+const LayoutIcon = require("../../assets/dashboard/layout.png")
 import { useDarkMode } from "storybook-dark-mode"
 
 const myTheme = useSpiroKitTheme({
@@ -46,114 +47,121 @@ type DashboardItemProps = {
 
 const componentItems: DashboardItemProps[] = [
 	{
+		id: 17,
+		name: "Layout",
+		url: "/?path=/docs/components-layout--box",
+		accentColor: "indigo",
+		icon: LayoutIcon
+	},
+	{
 		id: 1,
 		name: "Alert",
-		url: "/?path=/docs/components-alert--arguments-table",
+		url: "/?path=/docs/components-alert--basic-example",
 		accentColor: "emerald",
 		icon: AlertIcon
 	},
 	{
 		id: 2,
 		name: "Avatar",
-		url: "/?path=/docs/components-avatar--arguments-table",
+		url: "/?path=/docs/components-avatar--basic-example",
 		accentColor: "red",
 		icon: AvatarIcon
 	},
 	{
 		id: 3,
 		name: "Avatar Group",
-		url: "/?path=/docs/components-avatar-group--arguments-table",
+		url: "/?path=/docs/components-avatar-group--basic-example",
 		accentColor: "blue",
 		icon: AvatarGroupIcon
 	},
 	{
 		id: 4,
 		name: "Badge",
-		url: "/?path=/docs/components-badge--arguments-table",
+		url: "/?path=/docs/components-badge--basic-example",
 		accentColor: "orange",
 		icon: BadgeIcon
 	},
 	{
 		id: 5,
 		name: "Horizontal Card",
-		url: "/?path=/docs/components-horizontal-card--arguments-table",
+		url: "/?path=/docs/components-horizontal-card--basic-example",
 		accentColor: "indigo",
 		icon: HorizontalCardIcon
 	},
 	{
 		id: 6,
 		name: "Button",
-		url: "/?path=/docs/components-button--arguments-table",
+		url: "/?path=/docs/components-button--basic-example",
 		accentColor: "rose",
 		icon: ButtonIcon
 	},
 	{
 		id: 7,
 		name: "Modal",
-		url: "/?path=/docs/components-modal--arguments-table",
+		url: "/?path=/docs/components-modal--basic-example",
 		accentColor: "emerald",
 		icon: ModalIcon
 	},
 	{
 		id: 8,
 		name: "Input",
-		url: "/?path=/docs/components-input--arguments-table",
+		url: "/?path=/docs/components-input--basic-example",
 		accentColor: "red",
 		icon: InputIcon
 	},
 	{
 		id: 9,
 		name: "Portrait Card",
-		url: "/?path=/docs/components-portrait-card--arguments-table",
+		url: "/?path=/docs/components-portrait-card--basic-example",
 		accentColor: "amber",
 		icon: PortraitCardIcon
 	},
 	{
 		id: 10,
 		name: "Search Box",
-		url: "/?path=/docs/components-search-box--arguments-table",
+		url: "/?path=/docs/components-search-box--basic-example",
 		accentColor: "blue",
 		icon: SearchBoxIcon
 	},
 	{
 		id: 11,
 		name: "Vertical Card",
-		url: "/?path=/docs/components-vertical-card--arguments-table",
+		url: "/?path=/docs/components-vertical-card--basic-example",
 		accentColor: "orange",
 		icon: VerticalCardIcon
 	},
 	{
 		id: 12,
 		name: "Switch",
-		url: "/?path=/docs/components-switch--arguments-table",
+		url: "/?path=/docs/components-switch--basic-example",
 		accentColor: "indigo",
 		icon: SwitchIcon
 	},
 	{
 		id: 13,
 		name: "Select",
-		url: "/?path=/docs/components-select--arguments-table",
+		url: "/?path=/docs/components-select--basic-example",
 		accentColor: "amber",
 		icon: SelectIcon
 	},
 	{
 		id: 14,
 		name: "Text Area",
-		url: "/?path=/docs/components-text-area--arguments-table",
+		url: "/?path=/docs/components-text-area--basic-example",
 		accentColor: "rose",
 		icon: TextAreaIcon
 	},
 	{
 		id: 15,
 		name: "Tab Bar",
-		url: "/?path=/docs/components-tab-bar--tab-bar-arguments-table",
+		url: "/?path=/docs/components-tab-bar--tab-bar-basic-example",
 		accentColor: "blue",
 		icon: TabBarIcon
 	},
 	{
 		id: 16,
 		name: "Radio Button",
-		url: "/?path=/docs/components-radio-button-group--arguments-table",
+		url: "/?path=/docs/components-radio-button-group--basic-example",
 		accentColor: "emerald",
 		icon: RadioButtonIcon
 	}
@@ -177,7 +185,7 @@ const typographyItems: DashboardItemProps[] = [
 const themeItems: DashboardItemProps[] = [
 	{
 		id: 1,
-		name: "Setup & Customization",
+		name: "Theme",
 		url: "/?path=/docs/getting-started-theme--setup-accent-color",
 		accentColor: "rose",
 		type: "secondary"
@@ -198,11 +206,11 @@ export const Dashboard: React.FC = () => {
 		<SpiroKitProvider theme={myTheme}>
 			<Box width="full">
 				<TitleOne marginBottom={2} colorMode={colorMode}>
-					Theme
+					Customization
 				</TitleOne>
 				<HStack marginBottom={4} maxWidth={"1280px"} flexWrap="wrap">
 					{themeItems.map((item) => (
-						<DashboardItem {...item} />
+						<DashboardItem key={item.id} {...item} />
 					))}
 				</HStack>
 				<TitleOne marginBottom={2} colorMode={colorMode}>
@@ -210,7 +218,7 @@ export const Dashboard: React.FC = () => {
 				</TitleOne>
 				<HStack marginBottom={4} maxWidth={"1280px"} flexWrap="wrap">
 					{typographyItems.map((item) => (
-						<DashboardItem {...item} />
+						<DashboardItem key={item.id} {...item} />
 					))}
 				</HStack>
 				<TitleOne marginBottom={2} colorMode={colorMode}>
@@ -218,7 +226,7 @@ export const Dashboard: React.FC = () => {
 				</TitleOne>
 				<HStack marginBottom={4} maxWidth={"1280px"} flexWrap="wrap">
 					{componentItems.map((item) => (
-						<DashboardItem {...item} />
+						<DashboardItem key={item.id} {...item} />
 					))}
 				</HStack>
 			</Box>

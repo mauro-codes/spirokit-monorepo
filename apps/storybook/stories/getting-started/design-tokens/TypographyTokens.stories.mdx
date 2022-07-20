@@ -1,0 +1,61 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { lineHeights, fontWeights, letterSpacings, fontSizes, Box, VStack, Text, SpiroKitProvider, useSpiroKitTheme, LargeTitle, TitleOne, Footnote, TitleThree, Subhead, Body, usePoppins, Button, HorizontalCard, Avatar, Badge } from "spirokit"
+import { AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { FontCardList, AccentColorSwatches, GrayColorSwatches, CustomAccentColor } from "../../../src/documentation"
+
+<Meta 
+	title="Getting started/Design tokens/Typography tokens"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+<Story 
+	name="Line height">
+	<LargeTitle marginBottom={4} marginX={-4}>Typography</LargeTitle>
+	<TitleOne>Line height</TitleOne>
+	<Source
+		language='ts'
+		dark
+		format={true}
+		code={JSON.stringify(lineHeights,null, "\t")}
+	/>
+</Story>
+
+<Story 
+	name="Letter Spacing">
+	<TitleOne>Letter Spacing</TitleOne>
+	<Source
+		language='ts'
+		dark
+		format={true}
+		code={JSON.stringify(letterSpacings,null, "\t")}
+	/>
+</Story>
+
+<Story 
+	name="Font weight">
+	<TitleOne>Font weight</TitleOne>
+	<Source
+		language='ts'
+		dark
+		format={true}
+		code={JSON.stringify(fontWeights,null, "\t")}
+	/>
+</Story>
+
+
+<Story 
+	name="Font size">
+		<TitleOne>Font size</TitleOne>
+	<Source
+		language='ts'
+		dark
+		format={true}
+		code={JSON.stringify(fontSizes,null, "\t")}
+	/>
+</Story>

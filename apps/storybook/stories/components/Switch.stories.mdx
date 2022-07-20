@@ -1,0 +1,424 @@
+import { Box, VStack, Switch } from "spirokit"
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { UserIcon, StarIcon } from "react-native-heroicons/outline"
+import { spaceArgTypes, SpaceArgTypesComments } from "../arg-types/StyleProps"
+
+<Meta 
+	title="Components/Switch"
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}} 
+/>
+
+# Switch
+
+---
+
+---
+
+## Basic example
+
+<Canvas withSource="open">
+	<Story
+		name="Basic example"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { Switch } from "@spirokit/core"
+												
+						const [value, setValue] = React.useState(false)
+						
+						const App = () => {
+							return (
+								<Switch value={value} onValueChange={(newValue) => setValue(newValue)} />
+							)
+						}
+					`
+				}
+			}
+		}}>
+		<Box width={375} alignItems="flex-start">
+			<Switch value={true}/>
+		</Box>
+	</Story>
+</Canvas>
+
+## Disabled
+
+<Canvas withSource="open">
+	<Story
+		name="Disabled"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<VStack space={4}>
+									<Switch value={true} isDisabled={true} />
+									<Switch value={false} isDisabled={true} />
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			return (
+				<VStack space={4} width={375}>
+					<Switch value={true} isDisabled={true} />
+					<Switch value={false} isDisabled={true} />
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Track color
+
+<Canvas withSource="open">
+	<Story
+		name="Track color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const App = () => {
+							return (
+								<VStack space={4}>
+									{/* Track color: Emerald */}
+									<Switch value={true} trackColor="emerald" />
+									
+									{/* Track color: Orange */}
+									<Switch value={false} trackColor="orange" />
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [valueOne, setValueOne] = React.useState(false)
+			const [valueTwo, setValueTwo] = React.useState(true)
+			
+			return (
+				<VStack space={4} width={375}>
+					<Switch value={valueOne} trackColor="emerald" onValueChange={(newValue) => setValueOne(newValue)} />
+					<Switch value={valueTwo} trackColor="orange" onValueChange={(newValue) => setValueTwo(newValue)} />
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Thumb color
+
+<Canvas withSource="open">
+	<Story
+		name="Thumb color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const [valueOne, setValueOne] = React.useState(false)
+						const [valueTwo, setValueTwo] = React.useState(true)
+						
+						const App = () => {
+							return (
+								<VStack space={4}>
+									{/* Thumb color: Emerald */}
+									<Switch 
+										value={valueOne} 
+										thumbColor="emerald" 
+										onValueChange={(newValue) => setValueOne(newValue)} 
+									/>
+									
+									{/* Thumb color: Orange */}
+									<Switch 
+										value={valueTwo} 
+										thumbColor="orange" 
+										onValueChange={(newValue) => setValueTwo(newValue)} 
+									/>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [valueOne, setValueOne] = React.useState(false)
+			const [valueTwo, setValueTwo] = React.useState(true)
+			
+			return (
+				<VStack space={4} width={375}>
+					<Switch value={valueOne} thumbColor="emerald" onValueChange={(newValue) => setValueOne(newValue)} />
+					<Switch value={valueTwo} thumbColor="orange" onValueChange={(newValue) => setValueTwo(newValue)} />
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Track and thumb color
+
+<Canvas withSource="open">
+	<Story
+		name="Track and Thumb color"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const [valueOne, setValueOne] = React.useState(false)
+						const [valueTwo, setValueTwo] = React.useState(true)
+						
+						const App = () => {
+							return (
+								<VStack space={4}>
+									{/* Track color: Orange - Thumb color: Emerald */}
+									<Switch 
+										value={valueOne} 
+										trackColor="orange" 
+										thumbColor="emerald" 
+										onValueChange={(newValue) => setValueOne(newValue)} 
+									/>
+									
+									{/* Track color: Red - Thumb color: Amber */}
+									<Switch 
+										value={valueTwo} 
+										trackColor="red" 
+										thumbColor="amber" 
+										onValueChange={(newValue) => setValueTwo(newValue)} 
+									/>
+								</VStack>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [valueOne, setValueOne] = React.useState(false)
+			const [valueTwo, setValueTwo] = React.useState(true)
+			
+			return (
+				<VStack space={4} width={375}>
+					<Switch value={valueOne} trackColor="orange" thumbColor="emerald" onValueChange={(newValue) => setValueOne(newValue)} />
+					<Switch value={valueTwo} trackColor="red" thumbColor="amber" onValueChange={(newValue) => setValueTwo(newValue)} />
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the global color mode
+
+You can optionally override the color mode for this specific component. You can choose between `light` and `dark`. 
+
+By default, the component will use the globally active color mode.
+
+<Canvas withSource="open">
+	<Story
+		name="Color mode override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const [valueOne, setValueOne] = React.useState(false)
+						const [valueTwo, setValueTwo] = React.useState(true)
+						
+						const App = () => {
+							return (
+								<Switch 
+									value={valueTwo} 
+									colorMode="light" 
+									onValueChange={(newValue) => setValueTwo(newValue)} 
+								/>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			return (
+				<VStack space={4} width={375}>
+					<Switch colorMode="light" onValueChange={(newValue) => setValueOne(newValue)} />
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding the accent color
+
+You can optionally override the accent color for this specific component. You can choose between `blue`, `orange`, `rose`, `amber`, `indigo`, `emerald`, `red`. 
+
+By default, the component will use the globally active accent color, defined by the theme.
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const [valueOne, setValueOne] = React.useState(false)
+						const [valueTwo, setValueTwo] = React.useState(true)
+						
+						const App = () => {
+							return (
+								<Switch 
+									value={valueOne} 
+									accentColor="rose"
+									onValueChange={(newValue) => setValueOne(newValue)} 
+								/>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [valueOne, setValueOne] = React.useState(false)
+			const [valueTwo, setValueTwo] = React.useState(true)
+			
+			return (
+				<VStack space={4} width={375} alignItems="flex-start">
+					<Switch value={valueOne} accentColor="rose" onValueChange={(newValue) => setValueOne(newValue)} />
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Overriding color mode and accent color
+Both `colorMode` and `accentColor` can be overriten at the same time
+
+<Canvas withSource="open">
+	<Story
+		name="Accent color + Color mode override override"
+		parameters={{
+			docs: {
+				source: {
+					code: dedent`
+						import { VStack, Switch } from "@spirokit/core"
+						
+						const [valueOne, setValueOne] = React.useState(false)
+						const [valueTwo, setValueTwo] = React.useState(true)
+						
+						const App = () => {
+							return (
+								<Switch 
+									value={valueOne} 
+									accentColor="rose"
+									colorMode="light" 
+									onValueChange={(newValue) => setValueOne(newValue)} 
+								/>
+							)
+						}
+					`
+				}
+			}
+		}}>
+		{(args) => {
+			const [valueOne, setValueOne] = React.useState(false)
+			const [valueTwo, setValueTwo] = React.useState(true)
+			return (
+				<VStack space={4} width={375} alignItems="flex-start">
+					<Switch 
+						value={valueOne} accentColor="rose" colorMode="light" onValueChange={(newValue) => setValueOne(newValue)}>
+					</Switch>
+				</VStack>
+			)
+		}}
+	</Story>
+</Canvas>
+
+## Arguments table
+
+<Story
+	name="Arguments Table"
+	args={{
+		value: true,
+		isDisabled: false
+	}}
+	argTypes={{
+		value: {
+			name: "value",
+			type: { name: "boolean", required: false },
+			description: "Plain text that will be rendered inside the button"
+		},
+		isDisabled: {
+			description: "**Optional**\n\nIf `true`, the switch will be disabled. The default value is `false`",
+			type: { name: "boolean", required: false },
+			defaultValue: {
+				summary: false
+			}
+		},
+		accessibilityLabel: {
+			description: "**Optional**\n\nImprove the UX for users that heavily rely on screen readers",
+			type: { name: "string", required: false }
+		},
+		colorMode: {
+			options: ["light", "dark"],
+			description: "**Optional**\n\nAllows you to override the global color mode to apply a specific color mode for the component",
+			table: {
+				type: {
+					summary: "ColorMode"
+				}
+			},
+			control: { type: "radio" }
+		},
+		accentColor: {
+			options: ["blue", "orange", "rose", "amber", "indigo", "emerald", "red"],
+			description: "**Optional**\n\nAllows you to override the accent color to apply a specific accent for this component",
+			table: {
+				type: {
+					summary: "AccentColor"
+				}
+			},
+			control: { type: "radio" }
+		},
+		onValueChange: {
+			description: "**Optional**\n\nTriggered every time the switch change",
+			table: {
+				type: {
+					summary: "(value: boolean) => void"
+				}
+			}
+		},
+	}}>
+</Story>
+
+<ArgsTable story="Arguments Table" />
+
+## Style props
+
+<Story
+	name="Style props"
+	argTypes={spaceArgTypes}>
+	<Box marginX="-4">
+		<ArgsTable story="Style props"/>
+		<SpaceArgTypesComments componentName="Switch"/>
+	</Box>
+</Story>

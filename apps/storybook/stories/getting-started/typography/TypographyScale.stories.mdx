@@ -1,0 +1,21 @@
+import { Source, ArgsTable, Meta, Story, Canvas } from "@storybook/addon-docs"
+import dedent from "ts-dedent"
+import { Box, VStack, Text, LargeTitle, Button } from "spirokit"
+import { AcademicCapIcon, StarIcon } from "react-native-heroicons/outline"
+import { FontCardList } from "../../../src/documentation"
+
+<Meta 
+	title="Getting started/Typography/Scale"  
+	parameters={{
+		viewMode: 'docs',
+		previewTabs: { 
+			canvas: { hidden: true } 
+		},
+	}}
+/>
+
+# Typography scale & Font family
+
+SpiroKit provides a set of type sizes that work well together, and uses `Poppins` as a default font:
+
+<FontCardList></FontCardList>
